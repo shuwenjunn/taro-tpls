@@ -9,6 +9,9 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
+  alias: {
+    '@/config': 'src/config',
+  },
   babel: {
     sourceMap: true,
     presets: [

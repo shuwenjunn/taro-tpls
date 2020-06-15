@@ -2,6 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import config from '@/config'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -36,7 +37,7 @@ type PageState = {}
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
 interface Index {
-  props: IProps;
+  props: IProps
 }
 
 @connect(({ counter }) => ({
@@ -66,7 +67,7 @@ class Index extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
+    console.log(this.props, nextProps,config)
   }
 
   componentWillUnmount () { }
@@ -75,6 +76,15 @@ class Index extends Component {
 
   componentDidHide () { }
 
+  async add(){
+    const a=await new Promise((resolve)=>{
+      setTimeout(()=>{
+        resolve('1111')
+      },1000)
+    })
+    console.log(a)
+  }
+
   render () {
     return (
       <View className='index'>
@@ -82,7 +92,7 @@ class Index extends Component {
         <Button className='dec_btn' onClick={this.props.dec}>-</Button>
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
         <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+        <View onClick={this.add.bind(this)}><Text>Hello, World</Text></View>
       </View>
     )
   }
