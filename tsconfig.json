@@ -23,7 +23,7 @@
       "node_modules/@types"
     ],
     "paths": {
-      "@/config/*":["./src/config/*"],
+      "@/config/*":["src/common/config/*"],
     }
   },
   "exclude": [

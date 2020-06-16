@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import config from '@/config/'
+import { BASE_URL } from './config'
 
 // 续签失败状态码
 const HTTP_ERROR = {
@@ -20,9 +20,16 @@ interface Token {
     token: string
 }
 
+interface Server {
+    url: string
+    path: string
+    flag: string
+}
+
 class Request {
     isRefreshToken: boolean
-    requestQueue: []
+    requestQueue: unknown[]
+    apiMap: Map<string, Server>
 
     constructor() {
         this.isRefreshToken = false
@@ -37,49 +44,69 @@ class Request {
         Taro.setStorageSync('token', token)
     }
 
-    private refreshToken() {
-        // 伪代码
-        return this.request({ tag: '123456' }, 'GET')
+    private getSignature(params: any): string {
+        // goto
+        let sign = ''
+        for (const val of params) {
+            sign += val
+        }
+        return sign
     }
 
-    private checkHttpStatus(params: any, res: any, resolve: any, reject: any) {
+    private refreshToken() {
+        // todo
+        return this.request({ tag: '123456' })
+    }
+
+    private checkHttpStatus(params: any, res: any) {
         // token过期 需要刷新token
-
-        switch res.status
+        switch (res.status) {
             case '9999':
-
-        if (res.status === '9999') {
-            if (!this.isRefreshToken) {
-                this.isRefreshToken = true
-                this.refreshToken()
-                    .then((result: any) => {
-                        this.setToken(result.token)
-                        this.requestQueue.forEach(cb => {
-                            cb()
+                if (!this.isRefreshToken) {
+                    this.isRefreshToken = true
+                    this.refreshToken()
+                        .then((result: any) => {
+                            this.setToken(result.token)
+                            this.requestQueue.forEach(cb => {
+                                cb()
+                            })
                         })
+                } else {
+                    // 缓存请求
+                    this.requestQueue.push(() => {
+                        this.request(params)
                     })
-            } else {
-                this.requestQueue.push(() => {
-                    this.request(params)
-                })
-            }
+                }
+                break;
+            default:
+
         }
     }
 
     private request(params: any) {
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
             Taro.request({
-                ...params,
+                data: params,
                 method: params.method || 'GET',
+                url: BASE_URL,
                 header: {
                     'content-type': 'application/x-www-form-urlencoded'
                 },
             })
         })
-            .then(res => {
-                this.checkHttpStatus(res, params, resolve, reject)
+            .then(response => {
+                const { statusCode, data } = (response as any)
+                if (statusCode >= 200 && statusCode <= 300) {
+                    this.checkHttpStatus(data, params)
+                }
+
+            })
+            .catch(err => {
+                console.log(`err is ${err}`)
             })
     }
 
-
+    // upload file 上传文件
 }
+
+export default new Request()

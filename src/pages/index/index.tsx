@@ -4,7 +4,7 @@ import { View, Button, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import config from '@/config'
 
-import { add, minus, asyncAdd } from '../../actions/counter'
+import { add, minus, asyncAdd } from '../../store/actions/counter'
 
 import './index.less'
 
