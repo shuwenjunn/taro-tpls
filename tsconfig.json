@@ -24,6 +24,8 @@
     ],
     "paths": {
       "@/config/*":["src/common/config/*"],
+      "@/api/*":["src/common/api/*"],
+      "@/images/*":["src/assets/images/*"]
     }
   },
   "exclude": [

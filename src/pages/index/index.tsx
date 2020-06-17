@@ -2,11 +2,9 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import config from '@/config'
 
 import { add, minus, asyncAdd } from '../../store/actions/counter'
 
-import './index.less'
 
 // #region 书写注意
 //
@@ -67,7 +65,7 @@ class Index extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps,config)
+    console.log(this.props, nextProps)
   }
 
   componentWillUnmount () { }
