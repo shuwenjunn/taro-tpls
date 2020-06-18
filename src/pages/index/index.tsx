@@ -1,9 +1,9 @@
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import {ComponentClass} from 'react'
+import Taro, {Component, Config} from '@tarojs/taro'
+import {View, Button, Text} from '@tarojs/components'
+import {connect} from '@tarojs/redux'
 
-import { add, minus, asyncAdd } from '../../store/actions/counter'
+import {add, minus, asyncAdd} from '../../store/actions/counter'
 
 
 // #region 书写注意
@@ -38,59 +38,87 @@ interface Index {
   props: IProps
 }
 
-@connect(({ counter }) => ({
+@connect(({counter}) => ({
   counter
 }), (dispatch) => ({
-  add () {
+  add() {
     dispatch(add())
   },
-  dec () {
+  dec() {
     dispatch(minus())
   },
-  asyncAdd () {
+  asyncAdd() {
     dispatch(asyncAdd())
   }
 }))
 class Index extends Component {
 
-    /**
+  /**
    * 指定config的类型声明为: Taro.Config
    *
    * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
-    config: Config = {
+  config: Config = {
     navigationBarTitleText: '首页'
   }
 
-  componentWillReceiveProps (nextProps) {
+  constructor() {
+    super()
+    this.state = {
+      currAddress: {}
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
   }
 
-  componentWillUnmount () { }
+  componentDidMount() {
+    console.log(this.$router.path)
+  }
 
-  componentDidShow () { }
+  componentWillUnmount() {
+  }
 
-  componentDidHide () { }
+  componentDidShow() {
+    console.log(Taro.getStorageSync('currAddress'))
+    this.setState({
+      currAddress: Taro.getStorageSync('currAddress') ? JSON.parse(Taro.getStorageSync('currAddress')) : {}
+    })
+  }
 
-  async add(){
-    const a=await new Promise((resolve)=>{
-      setTimeout(()=>{
+  componentDidHide() {
+  }
+
+  async add() {
+    const a = await new Promise((resolve) => {
+      setTimeout(() => {
         resolve('1111')
-      },1000)
+      }, 1000)
     })
     console.log(a)
   }
 
-  render () {
+  goSelect = () => {
+    Taro.navigateTo({
+      url: '/pages/addressList/index'
+    })
+  }
+
+  render() {
+    const {currAddress} = this.state
     return (
       <View className='index'>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View onClick={this.add.bind(this)}><Text>Hello, World</Text></View>
+        {/*<Button className='add_btn' onClick={this.props.add}>+</Button>*/}
+        {/*<Button className='dec_btn' onClick={this.props.dec}>-</Button>*/}
+        {/*<Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>*/}
+        {/*<View><Text>{this.props.counter.num}</Text></View>*/}
+        {/*<View onClick={this.add.bind(this)}><Text>Hello, World</Text></View>*/}
+
+        你的收货地址是：{JSON.stringify(currAddress) || ''}
+        <Button type='primary' onClick={this.goSelect.bind(this)}>选择收货地址</Button>
       </View>
     )
   }

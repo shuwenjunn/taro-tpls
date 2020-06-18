@@ -25,6 +25,7 @@
     "paths": {
       "@/config/*":["src/common/config/*"],
       "@/api/*":["src/common/api/*"],
+      "@/common/*":["src/common/*"],
       "@/images/*":["src/assets/images/*"]
     }
   },

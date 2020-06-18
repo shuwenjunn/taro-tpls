@@ -28,6 +28,9 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/index/index',
+      'pages/addressList/index',
+      'pages/addAddress/index',
+      'pages/editAddress/index',
       'pages/login/index',
     ],
     window: {

@@ -13,6 +13,7 @@ const config = {
     "@/config": "src/common/config",
     "@/images": "src/assets/images",
     "@/api": "src/common/api",
+    "@/common": "src/common",
   },
   babel: {
     sourceMap: true,
