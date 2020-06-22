@@ -1,5 +1,5 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { Provider } from '@tarojs/redux'
+import Taro, {Component, Config} from '@tarojs/taro'
+import {Provider} from '@tarojs/redux'
 
 import Index from './pages/index'
 
@@ -24,14 +24,17 @@ class App extends Component {
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
-  // eslint-disable-next-line react/sort-comp
+    // eslint-disable-next-line react/sort-comp
   config: Config = {
     pages: [
       'pages/index/index',
       'pages/addressList/index',
       'pages/addAddress/index',
       'pages/editAddress/index',
-      'pages/login/index',
+      // 'pages/login/index',
+      'tpls/login/pages/login/index',
+      'tpls/login/pages/regist/index',
+      'tpls/login/pages/setPassword/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -41,23 +44,27 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount() {
+  }
 
-  componentDidShow () {}
+  componentDidShow() {
+  }
 
-  componentDidHide () {}
+  componentDidHide() {
+  }
 
-  componentDidCatchError () {}
+  componentDidCatchError() {
+  }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render () {
+  render() {
     return (
       <Provider store={store}>
-        <Index />
+        <Index/>
       </Provider>
     )
   }
 }
 
-Taro.render(<App />, document.getElementById('app'))
+Taro.render(<App/>, document.getElementById('app'))

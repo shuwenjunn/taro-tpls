@@ -3,6 +3,9 @@ import {View, Text} from '@tarojs/components'
 import styles from './style.module.less'
 
 export interface AddressCardprops {
+  /**
+   * 选择地址回调方法
+   */
   onSelect(props: AddressCardprops): void
   contact: string
   phone: string

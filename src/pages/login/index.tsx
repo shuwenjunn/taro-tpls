@@ -112,8 +112,15 @@ class Index extends Component<IProps, PageState> {
             <Image className={styles.icon} src={require('../../assets/images/password.svg')}/>
             <Input className={styles.input} name='passowrd' password placeholder='请输入密码'/>
           </View>
-          <Button className={styles.submit} formType='submit' loading={this.state.loading} disabled={this.state.loading}
-                  plain>{this.state.loading ? '登陆中...' : '登陆'}</Button>
+          <Button
+            className={styles.submit}
+            formType='submit'
+            loading={this.state.loading}
+            disabled={this.state.loading}
+            plain
+          >
+            {this.state.loading ? '登陆中...' : '登陆'}
+          </Button>
         </Form>
       </View>
     )

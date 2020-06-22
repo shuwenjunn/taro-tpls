@@ -143,12 +143,12 @@ class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, '
 
           <View className={styles.formItem}>
             <View className={styles.label}>详细地址</View>
-            <Input name='address' value={address} className={styles.input} placeholder='请填写详细地址'/>
+            <Input name='address' value={address} className={styles.input} placeholder='请填写详细地址' />
           </View>
 
           <View className={styles.formItem}>
             <View className={styles.label}>联系人</View>
-            <Input name='contact' value={contact} className={styles.input} placeholder='请填写联系人'/>
+            <Input name='contact' value={contact} className={styles.input} placeholder='请填写联系人' />
           </View>
 
           <RadioItem
@@ -159,7 +159,7 @@ class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, '
 
           <View className={styles.formItem}>
             <View className={styles.label}>手机号</View>
-            <Input name='phone' value={phone} className={styles.input} placeholder='请填写手机号' type='number'/>
+            <Input name='phone' value={phone} className={styles.input} placeholder='请填写手机号' type='number' />
           </View>
           <Button className={styles.submit} formType='submit'>保存地址</Button>
         </Form>

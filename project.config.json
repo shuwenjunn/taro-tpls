@@ -34,7 +34,28 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "tpls/login/pages/login/index",
+					"pathName": "tpls/login/pages/login/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/login/pages/regist/index",
+					"pathName": "tpls/login/pages/regist/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/login/pages/setPassword/index",
+					"pathName": "tpls/login/pages/setPassword/index",
+					"scene": null
+				}
+			]
 		}
 	}
 }

@@ -3,17 +3,9 @@ import {View} from '@tarojs/components'
 import styles from './style.module.less'
 import {AddressCard, AddressCardprops} from '../../components/AddressCard'
 
-type PageStateProps = {
-  counter: {
-    num: number
-  }
-}
+type PageStateProps = {}
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
+type PageDispatchProps = {}
 
 type PageOwnProps = {}
 

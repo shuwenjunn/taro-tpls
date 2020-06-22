@@ -1,0 +1,110 @@
+@import "../../../../common/styles/config";
+
+.index {
+  width: 750px;
+  height: 100vh;
+  overflow: hidden;
+
+  .formWrapper {
+
+    .skip{
+      font-size: @font-lv-3;
+      text-align: right;
+      padding-right: 44px;
+      color: #999999;
+      margin-bottom: 48px;
+      margin-top: 48px;
+    }
+
+    .formItem {
+      display: flex;
+      align-items: center;
+      margin: 44px 28px 0 57px;
+      height: 84px;
+      font-size: @font-lv-4;
+      justify-content: space-between;
+      border-bottom: 1px solid #E3E3E3;
+
+      &:first-child {
+        margin-top: 108px;
+        margin-bottom: 30px;
+      }
+
+      &.nomargin{
+        margin-top: 0;
+      }
+
+      .input {
+        height: 80px;
+        padding: 0 16px;
+        flex: 1;
+        color: #666;
+      }
+
+      .codeBtn {
+        width: 180px;
+        height: 56px;
+        background: @base-color;
+        border-radius: 28px;
+        text-align: center;
+        line-height: 56px;
+        color: #ffffff;
+        font-size: @font-lv-5;
+
+        &.disabled {
+          background: @base-color-disabled;
+        }
+      }
+    }
+
+    .opts {
+      padding: 0 30px 0 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: @font-lv-4;
+      color: @form-label-color;
+      margin-top: 72px;
+    }
+
+    .submit {
+      width: 600px;
+      height: 90px;
+      background: linear-gradient(90deg, @bg-start-color, @bg-end-color);
+      border-radius: 45px;
+      border: none;
+      color: #ffffff;
+      font-size: @font-lv-3;
+      line-height: 90px;
+      margin-top: 132px;
+    }
+
+    .toggle {
+      font-size: @font-lv-3;
+      color: @base-color;
+      margin-top: 40px;
+      text-align: center;
+    }
+  }
+
+  .verifyWrapper {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+
+    &.show {
+      display: block;
+    }
+
+    &.hide {
+      display: none;
+    }
+
+    .content {
+
+    }
+  }
+}

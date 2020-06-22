@@ -1,7 +1,8 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text, Picker} from '@tarojs/components'
 import './style.less'
-import region from './region'
+import regionData from './region'
+
 
 interface Iprops {
   onGetRegion(region: string): void
@@ -9,12 +10,27 @@ interface Iprops {
   defaultValue: string
 }
 
+
+type IDistrictAndCounty = string[]
+
+type ICity = Array<{
+  name: string
+  districtAndCounty: IDistrictAndCounty
+}>
+
+type IProvince = Array<{
+  name: string
+  city: ICity
+}>
+
 interface Istate {
   region: string
   range: any[]
   value: number[]
   list: any[]
 }
+
+const region: IProvince = regionData
 
 export default class TaroRegionPicker extends Component<Iprops, Istate> {
   state = {
@@ -29,8 +45,9 @@ export default class TaroRegionPicker extends Component<Iprops, Istate> {
   componentWillMount() {
     // 省市区选择器初始化
     // H5、微信小程序、百度小程序、字节跳动小程序
-    const range = this.state.range;
-    let temp = [];
+
+    const range: any[] = this.state.range;
+    let temp: string[] = [];
     for (let i = 0; i < region.length; i++) {
       temp.push(region[i].name);
     }
@@ -50,17 +67,17 @@ export default class TaroRegionPicker extends Component<Iprops, Istate> {
     })
 
     // 支付宝小程序
-    let list = this.state.list;
+    const list: any[] = this.state.list;
     for (let i = 0; i < region.length; i++) {
-      let proviceTemp = Object.create(null);
+      const proviceTemp = Object.create(null);
       proviceTemp.name = region[i].name;
       proviceTemp.subList = [];
       for (let j = 0; j < region[i].city.length; j++) {
-        let cityTemp = Object.create(null);
+        const cityTemp = Object.create(null);
         cityTemp.name = region[i].city[j].name;
         cityTemp.subList = [];
         for (let k = 0; k < region[i].city[j].districtAndCounty.length; k++) {
-          let districtAndCountyTemp = Object.create(null);
+          const districtAndCountyTemp = Object.create(null);
           districtAndCountyTemp.name = region[i].city[j].districtAndCounty[k];
           cityTemp.subList.push(districtAndCountyTemp);
         }
@@ -84,7 +101,7 @@ export default class TaroRegionPicker extends Component<Iprops, Istate> {
   // H5、微信小程序、百度小程序、字节跳动小程序
   onChange = (e) => {
     let regionTemp = this.state.region;
-    let rangeTemp = this.state.range;
+    const rangeTemp = this.state.range;
     let valueTemp = this.state.value;
 
     valueTemp = e.detail.value;
@@ -98,18 +115,20 @@ export default class TaroRegionPicker extends Component<Iprops, Istate> {
     })
   }
   onColumnChange = (e) => {
-    let rangeTemp = this.state.range;
-    let valueTemp = this.state.value;
+    const rangeTemp: any[] = this.state.range;
+    const valueTemp: number[] = this.state.value;
 
-    let column = e.detail.column;
-    let row = e.detail.value;
+    const column = e.detail.column;
+    const row = e.detail.value;
 
     valueTemp[column] = row;
 
+    console.log('onColumnChange------->>>', rangeTemp, valueTemp, e.detail)
+
     switch (column) {
       case 0:
-        let cityTemp = [];
-        let districtAndCountyTemp = [];
+        const cityTemp: any[] = [];
+        const districtAndCountyTemp: string[] = [];
         for (let i = 0; i < region[row].city.length; i++) {
           cityTemp.push(region[row].city[i].name);
         }
@@ -122,7 +141,7 @@ export default class TaroRegionPicker extends Component<Iprops, Istate> {
         rangeTemp[2] = districtAndCountyTemp;
         break;
       case 1:
-        let districtAndCountyTemp2 = [];
+        const districtAndCountyTemp2: string[] = [];
         for (let i = 0; i < region[valueTemp[0]].city[row].districtAndCounty.length; i++) {
           districtAndCountyTemp2.push(region[valueTemp[0]].city[row].districtAndCounty[i]);
         }
@@ -141,20 +160,21 @@ export default class TaroRegionPicker extends Component<Iprops, Istate> {
 
   // 支付宝小程序
   onClick = () => {
-    let temp = this.state.region;
-    my.multiLevelSelect({
-      list: this.state.list,
-      success: (result) => {
-        if (result.success) {
-          temp = result.result[0].name + ' - ' + result.result[1].name + ' - ' + result.result[2].name;
-          this.setState({
-            region: temp
-          }, () => {
-            this.props.onGetRegion(this.state.region)
-          })
-        }
-      }
-    })
+    // let temp = this.state.region;
+    // eslint-disable-next-line no-undef
+    // my.multiLevelSelect({
+    //   list: this.state.list,
+    //   success: (result) => {
+    //     if (result.success) {
+    //       temp = result.result[0].name + ' - ' + result.result[1].name + ' - ' + result.result[2].name;
+    //       this.setState({
+    //         region: temp
+    //       }, () => {
+    //         this.props.onGetRegion(this.state.region)
+    //       })
+    //     }
+    //   }
+    // })
   }
 
   render() {
