@@ -113,15 +113,13 @@ class Index extends Component {
     })
   }
 
-  goModifyPassword=()=>{
+  goModifyPassword = () => {
     Taro.navigateTo({
       url: '/tpls/login/pages/setPassword/index?type=modifyPassword',
     })
   }
 
   render() {
-    const { currAddress } = this.state
-    console.log('getData',getData('token'))
     return (
       <View className='index'>
 
@@ -138,6 +136,17 @@ class Index extends Component {
           <Button type='primary' onClick={this.goLogin.bind(this)}>登陆</Button>
         )}
         <Button type='primary' onClick={this.goModifyPassword.bind(this)}>修改密码</Button>
+
+        <Button
+          type='primary'
+          onClick={() => {
+            Taro.navigateTo({
+              url: '/tpls/mine/pages/mine/index',
+            })
+          }}
+        >
+          个人中心
+        </Button>
       </View>
     )
   }

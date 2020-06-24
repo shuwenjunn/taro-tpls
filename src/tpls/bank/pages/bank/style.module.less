@@ -1,0 +1,84 @@
+@import "../../../../common/styles//config.less";
+.index {
+  .add {
+    margin: 39px auto 0 auto;
+    width: 688px;
+    height: 145px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 43px;
+    .icon {
+      width: 32px;
+      height: 32px;
+      display: block;
+      margin-right: 20px;
+      background: red;
+    }
+    .desc {
+      font-size: @font-lv-3;
+      color: @form-label-color;
+    }
+  }
+
+  .card {
+    position: relative;
+    width: 687px;
+    height: 225px;
+    border-radius: 8px;
+    margin: 39px auto 0 auto;
+    box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
+    .bg {
+      background: rgb(12, 181, 211);
+      width: 687px;
+      height: 225px;
+      display: block;
+      position: absolute;
+      border-radius: 8px;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .cardInfo {
+      display: flex;
+      padding:25px;
+      .logo {
+        margin-right: 16px;
+        display: block;
+        width: 60px;
+        height: 60px;
+        background: rgb(190, 157, 114);
+      }
+      .info {
+        .name {
+          color: #fff;
+          font-size: @font-lv-3;
+        }
+        .type {
+          font-size: @font-lv-5;
+          color: #fff;
+        }
+      }
+
+    }
+
+    .number {
+      text-align: center;
+      font-size: 60px;
+      color: #fff;
+    }
+  
+  }
+
+  .floatDesc{
+  }
+
+  .input{
+    width: 100%;
+    border:1px solid black;
+  }
+}

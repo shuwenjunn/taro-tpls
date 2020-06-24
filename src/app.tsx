@@ -1,6 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-
+import 'taro-ui/dist/style/index.scss'
 import tpls from './tplsRegist'
 
 import Index from './pages/index'
@@ -40,10 +40,15 @@ class App extends Component {
       'tpls/login/pages/regist/index',
       'tpls/login/pages/setPassword/index',
 
+      // 个人中心模块
       'tpls/mine/pages/mine/index',
       'tpls/mine/pages/about/index',
       'tpls/mine/pages/userinfo/index',
       'tpls/mine/pages/modifyNick/index',
+
+      // 银行卡模块
+      'tpls/bank/pages/bank/index',
+      'tpls/bank/pages/addBank/index',
     ],
     window: {
       backgroundTextStyle: 'light',

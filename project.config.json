@@ -83,6 +83,20 @@
 					"pathName": "tpls/mine/pages/modifyNick/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/bank/pages/bank/index",
+					"pathName": "tpls/bank/pages/bank/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/bank/pages/addBank/index",
+					"pathName": "tpls/bank/pages/addBank/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
