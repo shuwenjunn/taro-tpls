@@ -53,6 +53,35 @@
 					"id": -1,
 					"name": "tpls/login/pages/setPassword/index",
 					"pathName": "tpls/login/pages/setPassword/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/mine/pages/mine/index",
+					"pathName": "tpls/mine/pages/mine/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/mine/pages/about/index",
+					"pathName": "tpls/mine/pages/about/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/mine/pages/userinfo/index",
+					"pathName": "tpls/mine/pages/userinfo/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/mine/pages/modifyNick/index",
+					"pathName": "tpls/mine/pages/modifyNick/index",
+					"query": "",
 					"scene": null
 				}
 			]

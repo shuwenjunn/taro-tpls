@@ -1,0 +1,68 @@
+import Taro, { Component, Config } from '@tarojs/taro'
+import API from '@/api/request'
+import { Image, View } from '@tarojs/components'
+import styles from './style.module.less'
+import { config } from '../../config'
+
+console.log('config', config)
+
+type PageStateProps = {}
+
+type PageDispatchProps = {}
+
+type PageOwnProps = {}
+
+type PageState = {
+
+}
+
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+
+
+export default class Index extends Component<IProps, PageState> {
+
+
+    constructor() {
+        super()
+        this.state = {
+
+        }
+    }
+
+    componentDidMount() {
+
+    }
+
+    config: Config = {
+        navigationBarTitleText: '关于我们'
+    }
+
+    componentDidShow() {
+    }
+
+    componentDidHide() {
+    }
+
+    render() {
+
+        return (
+            <View className={styles.index}>
+                <Image className={styles.logo} src='https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png' />
+                <View className={styles.name}>{config.about.appName}</View>
+                <View className={styles.version}>{config.about.version}</View>
+
+                <View className={styles.list} >
+                    {config.about.list.length > 0 && config.about.list.map(t => (
+                        <View className={styles.it} key={t.desc}>
+                            <View className={styles.itL}>
+                                <View className={styles.desc}>{t.desc}</View>
+                            </View>
+                            <Image className={styles.itR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
+                        </View>
+                    ))}
+                </View>
+            </View>
+        )
+    }
+}
+

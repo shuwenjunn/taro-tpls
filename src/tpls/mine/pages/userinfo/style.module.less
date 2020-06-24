@@ -1,0 +1,73 @@
+@import "../../../../common/styles//config.less";
+
+.index {
+  min-height: 100vh;
+  overflow: hidden;
+  background: #fafafa;
+
+  .list {
+    background: #ffffff;
+    box-sizing: border-box;
+    padding: 0 40px;
+    margin: 0 auto;
+    margin-top: 20px;
+
+    &:first-child{
+      margin-top: 0;
+    }
+    .it {
+      display: flex;
+      border-bottom: 1px solid #f2f2f2;
+      justify-content: space-between;
+      align-items: center;
+      height: 97px;
+      &.uni{
+        height: 132px;
+      }
+
+      .itL {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          height: 36px;
+          width: 36px;
+          display: block;
+          margin-right: 20px;
+        }
+
+        .desc {
+          font-size: @font-lv-3;
+          color: @form-label-color;
+        }
+      }
+
+      .itR {
+        display: flex;
+        align-items: center;
+
+        .value {
+          color: @font-999;
+          font-size: @font-lv-3;
+        }
+
+        .arrow {
+          width: 13px;
+          height: 24px;
+          display: block;
+          margin-left: 46px;
+        }
+
+        .header {
+          width: 96px;
+          height: 96px;
+          display: block;
+        }
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}

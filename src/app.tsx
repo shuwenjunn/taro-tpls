@@ -38,7 +38,12 @@ class App extends Component {
       // 'pages/login/index',
       'tpls/login/pages/login/index',
       'tpls/login/pages/regist/index',
-      'tpls/login/pages/setPassword/index'
+      'tpls/login/pages/setPassword/index',
+
+      'tpls/mine/pages/mine/index',
+      'tpls/mine/pages/about/index',
+      'tpls/mine/pages/userinfo/index',
+      'tpls/mine/pages/modifyNick/index',
     ],
     window: {
       backgroundTextStyle: 'light',

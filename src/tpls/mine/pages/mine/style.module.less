@@ -1,1 +1,124 @@
-@import '../../../../common/styles//config.less'
+@import "../../../../common/styles//config.less";
+
+.index {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    height: 158px;
+    align-items: center;
+    padding: 0 32px;
+    .headerL {
+      display: flex;
+      align-items: center;
+      .avatar {
+        width: 88px;
+        height: 88px;
+        display: block;
+        margin-right: 54px;
+      }
+      .name {
+        color: @form-label-color;
+        font-size: @font-lv-2;
+      }
+    }
+    .headerR {
+      width: 13px;
+      height: 24px;
+      display: block;
+    }
+  }
+
+  .card {
+    width: 688px;
+    background: #ffffff;
+    box-shadow: @card-shadow;
+    border-radius: 10px;
+    padding-top: 34px;
+    padding-bottom: 18px;
+    margin: 0 auto;
+    .subtitle {
+      margin-left: 24px;
+      color: @form-label-color;
+      font-size: @font-lv-2;
+      margin-bottom: 24px;
+    }
+    .items {
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .it {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 88px;
+        margin-bottom: 16px;
+        .icon {
+          width: 44px;
+          height: 44px;
+          display: block;
+        }
+        .desc {
+          color: @font-999;
+          font-size: @font-lv-5;
+        }
+      }
+    }
+  }
+
+  .list {
+    width: 688px;
+    background: #ffffff;
+    box-shadow: @card-shadow;
+    box-sizing: border-box;
+    padding: 0 28px;
+    margin: 0 auto;
+    margin-top: 54px;
+    .it {
+      display: flex;
+      border-bottom: 1px solid #f2f2f2;
+      justify-content: space-between;
+      align-items: center;
+      height: 97px;
+      .itL {
+        display: flex;
+        align-items: center;
+        .icon {
+          height: 36px;
+          width: 36px;
+          display: block;
+          margin-right: 20px;
+        }
+        .desc {
+          font-size: @font-lv-3;
+          color: @form-label-color;
+        }
+      }
+
+      .itR {
+        width: 13px;
+        height: 24px;
+        display: block;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .exit {
+    margin: 19px auto 85px auto;
+    width: 688px;
+    height: 92px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 7px 64px 0px rgba(0, 0, 0, 0.07);
+    border-radius: 10px;
+    font-size: @font-lv-3;
+    color: @form-label-color;
+    text-align: center;
+    line-height: 92px;
+    border: 0;
+  }
+}
