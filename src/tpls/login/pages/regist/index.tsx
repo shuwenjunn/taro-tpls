@@ -189,7 +189,7 @@ export default class Index extends Component<IProps, PageState> {
           </View>
 
           <View className={styles.formItem}>
-            <Input className={styles.input} name='code' id='code' password placeholder='请输入验证码' />
+            <Input className={styles.input} name='code' id='code' type='number' placeholder='请输入验证码' />
             {phone && countdownTime === 60 ? (
               <View className={styles.codeBtn} onClick={this.onGetCode.bind(this)}>获取验证码</View>
             ) : (

@@ -1,9 +1,9 @@
-import {ComponentClass} from 'react'
-import Taro, {Component, Config} from '@tarojs/taro'
-import {View, Button, Text} from '@tarojs/components'
-import {connect} from '@tarojs/redux'
-
-import {add, minus, asyncAdd} from '../../store/actions/counter'
+import { ComponentClass } from 'react'
+import Taro, { Component, Config } from '@tarojs/taro'
+import { View, Button, Text } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
+import { getData } from '../../tpls/login/model'
+import { add, minus, asyncAdd } from '../../store/actions/counter'
 
 
 // #region 书写注意
@@ -38,7 +38,7 @@ interface Index {
   props: IProps
 }
 
-@connect(({counter}) => ({
+@connect(({ counter }) => ({
   counter
 }), (dispatch) => ({
   add() {
@@ -107,18 +107,37 @@ class Index extends Component {
     })
   }
 
+  goLogin = () => {
+    Taro.navigateTo({
+      url: '/tpls/login/pages/login/index',
+    })
+  }
+
+  goModifyPassword=()=>{
+    Taro.navigateTo({
+      url: '/tpls/login/pages/setPassword/index?type=modifyPassword',
+    })
+  }
+
   render() {
-    const {currAddress} = this.state
+    const { currAddress } = this.state
+    console.log('getData',getData('token'))
     return (
       <View className='index'>
+
         {/*<Button className='add_btn' onClick={this.props.add}>+</Button>*/}
         {/*<Button className='dec_btn' onClick={this.props.dec}>-</Button>*/}
         {/*<Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>*/}
         {/*<View><Text>{this.props.counter.num}</Text></View>*/}
         {/*<View onClick={this.add.bind(this)}><Text>Hello, World</Text></View>*/}
 
-        你的收货地址是：{JSON.stringify(currAddress) || ''}
-        <Button type='primary' onClick={this.goSelect.bind(this)}>选择收货地址</Button>
+        {/* 你的收货地址是：{JSON.stringify(currAddress) || ''}
+        <Button type='primary' onClick={this.goSelect.bind(this)}>选择收货地址</Button> */}
+
+        {getData(`token`) ? JSON.stringify(getData(`token`)) : (
+          <Button type='primary' onClick={this.goLogin.bind(this)}>登陆</Button>
+        )}
+        <Button type='primary' onClick={this.goModifyPassword.bind(this)}>修改密码</Button>
       </View>
     )
   }

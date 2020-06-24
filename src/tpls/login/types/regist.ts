@@ -3,11 +3,7 @@ export default interface LoginConfig {
      * 登陆方式
      * @default 'username'
      */
-    loginType?: 'phone' | 'username' | unknown
-    /**
-     * 是否允许多种登陆方式 true
-     */
-    multipl: boolean
+    loginType?: 'phone' | 'username'
     /**
      * 服务端和数据层的映射
      */
@@ -24,7 +20,7 @@ export default interface LoginConfig {
              */
             service(username: string, password: string): Promise<any>
             /**
-             * 数据key的值
+             * 数据层
              */
             model?: string
         }
@@ -40,7 +36,7 @@ export default interface LoginConfig {
              */
             service(phone: string, code: string): Promise<any>
             /**
-             * 数据key的值
+             * 数据层
              */
             model?: string
         }
