@@ -37,6 +37,8 @@ interface BlockConfig {
 
 
 export default interface MineConfig {
+  avatarKey: string
+  usernameKey: string
   blocks: Array<BlockConfig>
   list: Array<Array<{
     iconPath: string
@@ -52,4 +54,14 @@ export default interface MineConfig {
       [propNames: string]: string
     }
   }>>
+  api: {
+    getUserInfo: {
+      service(): Promise<any>
+      model?: string
+    }
+    exitLogin: {
+      service(): Promise<any>
+      model?: string
+    }
+  }
 }

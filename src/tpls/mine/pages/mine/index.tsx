@@ -1,8 +1,8 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import API from '@/api/request'
-import { Button, Image, View } from '@tarojs/components'
+import { Image, View } from '@tarojs/components'
 import styles from './style.module.less'
 import { config } from '../../config'
+import { setData } from '../../model'
 
 console.log('config', config)
 
@@ -13,7 +13,9 @@ type PageDispatchProps = {}
 type PageOwnProps = {}
 
 type PageState = {
-
+  userinfo: {
+    [propName: string]: string
+  }
 }
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
@@ -25,11 +27,22 @@ export default class Index extends Component<IProps, PageState> {
   constructor() {
     super()
     this.state = {
-
+      userinfo: {}
     }
   }
 
   componentDidMount() {
+
+  }
+
+  getUserInfo = async () => {
+    const { status, result } = await config.mine.api.getUserInfo.service()
+    if (status === 'ok') {
+      config.mine.api.getUserInfo.model && setData(config.mine.api.getUserInfo.model, result)
+      this.setState({
+        userinfo: result
+      })
+    }
 
   }
 
@@ -56,16 +69,31 @@ export default class Index extends Component<IProps, PageState> {
   }
 
 
+  /**
+   * 页面跳转
+   * @param data 页面参数
+   */
+  switchPage = (data: any) => {
+    console.log('ttttttttt', data.targetPath)
+    let url = data.targetPath
+    if (data.params) {
+      url += '?params=' + JSON.stringify(data.params)
+    }
+    console.log('url---------->>', url)
+    Taro.navigateTo({
+      url: url
+    })
+  }
 
 
   render() {
-
+    const { userinfo } = this.state
     return (
       <View className={styles.index}>
         <View className={styles.header}>
           <View className={styles.headerL}>
-            <Image className={styles.avatar} src='https://i.loli.net/2020/06/24/PnCt3khiUGcR6qa.png' />
-            <View className={styles.name}>大胖子</View>
+            <Image className={styles.avatar} src={userinfo[config.mine.avatarKey]} />
+            <View className={styles.name}>{userinfo[config.mine.usernameKey]}</View>
           </View>
           <Image className={styles.headerR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
         </View>
@@ -76,7 +104,7 @@ export default class Index extends Component<IProps, PageState> {
 
             <View className={styles.items}>
               {d.items.length > 0 && d.items.map(t => (
-                <View className={styles.it} key={t.desc}>
+                <View className={styles.it} key={t.desc} onClick={this.switchPage.bind(this, t)}>
                   <Image className={styles.icon} src={t.iconPath} />
                   <View className={styles.desc}>{t.desc}</View>
                 </View>
@@ -89,7 +117,7 @@ export default class Index extends Component<IProps, PageState> {
         {config.mine.list.length > 0 && config.mine.list.map((d, idx) => (
           <View className={styles.list} key={idx}>
             {d.length > 0 && d.map(t => (
-              <View className={styles.it} key={t.desc}>
+              <View className={styles.it} key={t.desc} onClick={this.switchPage.bind(this, t)}>
                 <View className={styles.itL}>
                   <Image className={styles.icon} src={t.iconPath} />
                   <View className={styles.desc}>{t.desc}</View>

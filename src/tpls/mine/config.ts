@@ -20,7 +20,7 @@ export const config: Iconfig = {
                 {
                     iconPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
                     desc: '待付款',
-                    targetPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
+                    targetPath: '/pages/addressList/index',
                     params: {
                         aaa: '1234'
                     }
@@ -28,7 +28,7 @@ export const config: Iconfig = {
                 {
                     iconPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
                     desc: '待发货',
-                    targetPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
+                    targetPath: '/pages/login/index',
                     params: {
                         aaa: '1234'
                     }
@@ -56,7 +56,7 @@ export const config: Iconfig = {
                 {
                     iconPath: 'https://i.loli.net/2020/06/24/H6G8EC5glDJT2IY.png',
                     desc: '修改密码',
-                    targetPath: '',
+                    targetPath: '/tpls/login/pages/setPassword/index',
                 },
                 {
                     iconPath: 'https://i.loli.net/2020/06/24/H6G8EC5glDJT2IY.png',
@@ -71,10 +71,29 @@ export const config: Iconfig = {
                 {
                     iconPath: 'https://i.loli.net/2020/06/24/H6G8EC5glDJT2IY.png',
                     desc: '关于我们',
-                    targetPath: '',
+                    targetPath: '/tpls/mine/pages/about/index',
                 },
             ]
-        ]
+        ],
+        api: {
+            getUserInfo: {
+                service: function () {
+                    return API.request({
+                        api: 'phone.login',
+                        data: {}
+                    })
+                },
+                model: 'userinfo'
+            },
+            exitLogin: {
+                service: function () {
+                    return API.request({
+                        api: 'phone.login',
+                        data: {}
+                    })
+                },
+            },
+        }
     },
 
     // 关于
@@ -85,7 +104,7 @@ export const config: Iconfig = {
         list: [
             {
                 desc: '使用帮助',
-                targetPath: 'fasfda'
+                targetPath: '/tpls/login/pages/setPassword/index'
             },
             {
                 desc: '隐私政策',
@@ -100,16 +119,15 @@ export const config: Iconfig = {
                 {
                     key: 'name',
                     desc: '安宝宝',
-                    placeholder:'未设置1',
+                    placeholder: '未设置1',
                 },
                 {
                     key: 'address',
                     desc: '地址管理',
-                    placeholder:'未设置'
+                    placeholder: '未设置'
                 },
             ],
         ]
-    }
-
+    },
 }
 

@@ -35,7 +35,7 @@ class App extends Component {
       'pages/addressList/index',
       'pages/addAddress/index',
       'pages/editAddress/index',
-      // 'pages/login/index',
+      'pages/login/index',
       'tpls/login/pages/login/index',
       'tpls/login/pages/regist/index',
       'tpls/login/pages/setPassword/index',
