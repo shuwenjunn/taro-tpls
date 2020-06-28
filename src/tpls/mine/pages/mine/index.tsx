@@ -56,7 +56,10 @@ export default class Index extends Component<IProps, PageState> {
   componentDidHide() {
   }
 
-  // bug
+  /**
+   * 
+   * @param res 分享
+   */
   onShareAppMessage(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -85,15 +88,21 @@ export default class Index extends Component<IProps, PageState> {
     })
   }
 
+  goUserInfo = () => {
+    Taro.navigateTo({
+      url: '/tpls/mine/pages/userinfo/index'
+    })
+  }
+
 
   render() {
     const { userinfo } = this.state
     return (
       <View className={styles.index}>
-        <View className={styles.header}>
+        <View className={styles.header} onClick={this.goUserInfo.bind(this)}>
           <View className={styles.headerL}>
-            <Image className={styles.avatar} src={userinfo[config.mine.avatarKey]} />
-            <View className={styles.name}>{userinfo[config.mine.usernameKey]}</View>
+            <Image className={styles.avatar} src={userinfo[config.mine.avatarKey] || 'https://i.loli.net/2020/06/24/PnCt3khiUGcR6qa.png'} />
+            <View className={styles.name}>{userinfo[config.mine.usernameKey] || '未登录'}</View>
           </View>
           <Image className={styles.headerR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
         </View>
@@ -104,12 +113,11 @@ export default class Index extends Component<IProps, PageState> {
 
             <View className={styles.items}>
               {d.items.length > 0 && d.items.map(t => (
-                <View className={styles.it} key={t.desc} onClick={this.switchPage.bind(this, t)}>
+                <View className={styles.it} style={{width:`${(100/d.maxCountInline)}%`}} key={t.desc} onClick={this.switchPage.bind(this, t)}>
                   <Image className={styles.icon} src={t.iconPath} />
                   <View className={styles.desc}>{t.desc}</View>
                 </View>
               ))}
-
             </View>
           </View>
         ))}

@@ -4,6 +4,6 @@ export default interface UserinfoConfig {
         key: string
         desc: string
         placeholder?: string
-        envnt?: string
+        envnt?: () => void
     }>>
 }

@@ -1,3 +1,4 @@
+import Taro, { Component, Config } from '@tarojs/taro'
 import API from "@/api/request"
 import MineConfig from './types/mine'
 import AboutConfig from "./types/about";
@@ -13,9 +14,11 @@ type Iconfig = {
 export const config: Iconfig = {
     // 我的页面
     mine: {
+        avatarKey:'avata',
+        usernameKey:'username',
         blocks: [{
             subTitle: '我的订单',
-            maxCountInline: 5,
+            maxCountInline: 4,
             items: [
                 {
                     iconPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
@@ -124,7 +127,12 @@ export const config: Iconfig = {
                 {
                     key: 'address',
                     desc: '地址管理',
-                    placeholder: '未设置'
+                    placeholder: '未设置',
+                    envnt:()=>{
+                        Taro.navigateTo({
+                            url:'/pages/addressList/index'
+                        })
+                    }
                 },
             ],
         ]

@@ -43,6 +43,21 @@ export default class Index extends Component<IProps, PageState> {
     componentDidHide() {
     }
 
+    /**
+     * 
+     * @param res 转发
+     */
+    onShareAppMessage(res) {
+        if (res.from === 'button') {
+            // 来自页面内转发按钮
+            console.log(res.target)
+        }
+        return {
+            title: '自定义转发标题',
+            path: '/page/user?id=123'
+        }
+    } Î
+
     render() {
 
         return (
