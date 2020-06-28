@@ -42,7 +42,7 @@ export default class Index extends Component<IProps, PageState> {
   // 修改昵称
   goModifyNickname = () => {
     Taro.navigateTo({
-      url: '/tpls/mine/pages/modifyNick/index'
+      url: `/tpls/mine/pages/modifyNick/index`
     })
   }
 

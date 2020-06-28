@@ -1,10 +1,10 @@
-import Taro, {Component, Config} from '@tarojs/taro'
-import {View, Form, Input, Image, Button} from '@tarojs/components'
-import {connect} from '@tarojs/redux'
+import Taro, { Component, Config } from '@tarojs/taro'
+import { View, Form, Input, Image, Button } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
 import API from "@/api/request"
 import styles from './style.module.less'
 import * as service from './service'
-import {add, minus, asyncAdd} from '../../store/actions/counter'
+import { add, minus, asyncAdd } from '../../store/actions/counter'
 
 type PageStateProps = {
   counter: {
@@ -26,7 +26,7 @@ type PageState = {
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
-@connect(({counter}) => ({
+@connect(({ counter }) => ({
   counter
 }), (dispatch) => ({
   add() {
@@ -76,7 +76,7 @@ class Index extends Component<IProps, PageState> {
   }
 
   onSubmit = async (e) => {
-    const {username, passowrd} = e.detail.value
+    const { username, passowrd } = e.detail.value
     console.log(e.detail.value)
     if (!username || !passowrd) {
       Taro.showToast({
@@ -89,8 +89,8 @@ class Index extends Component<IProps, PageState> {
     this.setState({
       loading: true
     })
-    const {status, result} = await service.login(e.detail.value)
-    this.setState({loading: false})
+    const { status, result } = await service.login(e.detail.value)
+    this.setState({ loading: false })
     if (status === 200) {
       API.setToken(result)
       Taro.navigateTo({
@@ -99,18 +99,19 @@ class Index extends Component<IProps, PageState> {
     }
   }
 
+
   render() {
     return (
       <View className={styles.login}>
         <View className={styles.logo}></View>
         <Form className={styles.formWrapper} onSubmit={this.onSubmit.bind(this)}>
           <View className={styles.formItem}>
-            <Image className={styles.icon} src={require('../../assets/images/username.svg')}/>
-            <Input className={styles.input} name='username' type='text' placeholder='请输入用户名' focus/>
+            <Image className={styles.icon} src={require('../../assets/images/username.svg')} />
+            <Input className={styles.input} name='username' type='text' placeholder='请输入用户名' focus />
           </View>
           <View className={styles.formItem}>
-            <Image className={styles.icon} src={require('../../assets/images/password.svg')}/>
-            <Input className={styles.input} name='passowrd' password placeholder='请输入密码'/>
+            <Image className={styles.icon} src={require('../../assets/images/password.svg')} />
+            <Input className={styles.input} name='passowrd' password placeholder='请输入密码' />
           </View>
           <Button
             className={styles.submit}

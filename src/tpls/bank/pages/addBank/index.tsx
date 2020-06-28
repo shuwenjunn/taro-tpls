@@ -110,6 +110,10 @@ export default class Index extends Component<IProps, PageState> {
 
 
         this.setState({ loading: true })
+        setTimeout(() => {
+            this.setState({ loading: false })
+            Taro.navigateBack()
+        }, 2000)
     }
 
     onInput = (e) => {
@@ -158,7 +162,7 @@ export default class Index extends Component<IProps, PageState> {
                         <Input className={styles.input} name='phone' type='number' id='phone' onInput={this.onInput.bind(this)} placeholder='请输入银行预留手机号' />
                     </View>
                     <View className={styles.formItem}>
-                        <Input className={styles.input} name='code' id='code' password placeholder='请输入验证码' />
+                        <Input className={styles.input} name='code' id='code' placeholder='请输入验证码' />
                         {phone && countdownTime === 60 ? (
                             <View className={styles.codeBtn} onClick={this.onGetCode.bind(this)}>获取验证码</View>
                         ) : (

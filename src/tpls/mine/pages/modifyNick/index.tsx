@@ -12,7 +12,9 @@ type PageDispatchProps = {}
 
 type PageOwnProps = {}
 
-type PageState = {}
+type PageState = {
+  username: string
+}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
@@ -22,11 +24,17 @@ export default class Index extends Component<IProps, PageState> {
 
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      username: ''
+    }
   }
 
   componentDidMount() {
-
+    if (this.$router.params.username) {
+      this.setState({
+        username: this.$router.params.username
+      })
+    }
   }
 
   config: Config = {
@@ -47,10 +55,10 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   render() {
-    console.log('config.userinfo.list', config.userinfo.list)
+    const { username } = this.state
     return (
       <View className={styles.index}>
-        <Input className={styles.input} onConfirm={this.onConfirm.bind(this)} autoFocus />
+        <Input className={styles.input} value={username} onConfirm={this.onConfirm.bind(this)} autoFocus />
       </View>
     )
   }

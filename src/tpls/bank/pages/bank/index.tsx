@@ -14,7 +14,7 @@ type PageDispatchProps = {}
 type PageOwnProps = {}
 
 type PageState = {
-
+  isOpen: boolean
 }
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
@@ -26,7 +26,7 @@ export default class Index extends Component<IProps, PageState> {
   constructor() {
     super()
     this.state = {
-
+      isOpen: false
     }
   }
 
@@ -48,16 +48,26 @@ export default class Index extends Component<IProps, PageState> {
 
   }
 
+  getCardList = async () => {
+    const { status, result } = await config.bank.api.getCardList.service()
+  }
+
   onConfirm = (e) => {
     console.log('eeee', e)
   }
 
-  render() {
+  goAddCard = () => {
+    Taro.navigateTo({
+      url: '/tpls/bank/pages/addBank/index'
+    })
+  }
 
+  render() {
+    const { isOpen } = this.state
     return (
       <View className={styles.index}>
-        <View className={styles.add}>
-          <View className={styles.icon}></View>
+        <View className={styles.add} onClick={this.goAddCard.bind(this)}>
+          <Image className={styles.icon} src='https://i.loli.net/2020/06/28/ZyWL3IocOubxztA.png' />
           <View className={styles.desc}>添加银行卡</View>
         </View>
 
@@ -75,7 +85,7 @@ export default class Index extends Component<IProps, PageState> {
           </View>
         </View>
 
-        <AtFloatLayout isOpened title='请输入六位数字密码' onClose={this.handleClose.bind(this)}>
+        <AtFloatLayout isOpened={isOpen} title='请输入六位数字密码' onClose={this.handleClose.bind(this)}>
           <View className={styles.floatDesc}>请输入支付密码，进行安全验证</View>
           <Input className={styles.input} type='number' />
         </AtFloatLayout>

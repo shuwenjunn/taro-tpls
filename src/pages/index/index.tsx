@@ -119,6 +119,12 @@ class Index extends Component {
     })
   }
 
+  goBank = () => {
+    Taro.navigateTo({
+      url: '/tpls/bank/pages/bank/index',
+    })
+  }
+
   render() {
     return (
       <View className='index'>
@@ -146,6 +152,12 @@ class Index extends Component {
           }}
         >
           个人中心
+        </Button>
+        <Button
+          type='primary'
+          onClick={this.goBank.bind(this)}
+        >
+          银行卡
         </Button>
       </View>
     )
