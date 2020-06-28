@@ -1,6 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import API from '@/api/request'
-import { Image, View } from '@tarojs/components'
+import { Image, View, Picker } from '@tarojs/components'
 import styles from './style.module.less'
 import { config } from '../../config'
 
@@ -62,6 +62,10 @@ export default class Index extends Component<IProps, PageState> {
     })
   }
 
+  onSelect = (e) => {
+    console.log('33333', e)
+  }
+
 
   render() {
     console.log('config.userinfo.list', config.userinfo.list)
@@ -87,6 +91,18 @@ export default class Index extends Component<IProps, PageState> {
               <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
             </View>
           </View>
+          <Picker mode='selector' value={0} range={config.userinfo.sexArray} onChange={this.onSelect.bind(this)}>
+            <View className={styles.it}>
+              <View className={styles.itL}>
+                <View className={styles.desc}>性别</View>
+              </View>
+              <View className={styles.itR}>
+                <View className={styles.value}>{config.userinfo.genderMap[config.userinfo.genderKey]}</View>
+                <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
+              </View>
+            </View>
+          </Picker>
+
         </View>
 
         {config.userinfo.list.map((d, idx) => (

@@ -1,21 +1,23 @@
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import API from "@/api/request"
 import MineConfig from './types/mine'
 import AboutConfig from "./types/about";
 import UserinfoCofig from './types/userinfo'
+import ModifyNickConfig from './types/modifyNick'
 
 type Iconfig = {
     mine: MineConfig
     about: AboutConfig
     userinfo: UserinfoCofig
+    modifyNick: ModifyNickConfig
 }
 
 // eslint-disable-next-line import/prefer-default-export
 export const config: Iconfig = {
     // 我的页面
     mine: {
-        avatarKey:'avata',
-        usernameKey:'username',
+        avatarKey: 'avata',
+        usernameKey: 'username',
         blocks: [{
             subTitle: '我的订单',
             maxCountInline: 4,
@@ -117,6 +119,10 @@ export const config: Iconfig = {
     },
     userinfo: {
         avatarKey: 'avatar',
+        usernameKey: 'username',
+        genderKey: 'gender',
+        sexArray: ['男', '女'],
+        genderMap: { man: '男', woman: '女', unknow: '未知', },
         list: [
             [
                 {
@@ -128,14 +134,26 @@ export const config: Iconfig = {
                     key: 'address',
                     desc: '地址管理',
                     placeholder: '未设置',
-                    envnt:()=>{
+                    envnt: () => {
                         Taro.navigateTo({
-                            url:'/pages/addressList/index'
+                            url: '/pages/addressList/index'
                         })
                     }
                 },
             ],
         ]
     },
+    modifyNick: {
+        api: {
+            modifyUserinfo: {
+                service: function (username: string) {
+                    return API.request({
+                        api: 'phone.login',
+                        data: { username }
+                    })
+                },
+            },
+        }
+    }
 }
 

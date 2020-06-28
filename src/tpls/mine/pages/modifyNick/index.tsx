@@ -39,8 +39,11 @@ export default class Index extends Component<IProps, PageState> {
   componentDidHide() {
   }
 
-  onConfirm = (e) => {
-    console.log('eeeeee', e.detail.value)
+  onConfirm = async (e) => {
+    const { status } = await config.modifyNick.api.modifyUserinfo.service(e.detail.value)
+    if (status === 'ok') {
+      Taro.navigateBack()
+    }
   }
 
   render() {
