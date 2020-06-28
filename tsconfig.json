@@ -26,6 +26,7 @@
       "@/config/*":["src/common/config/*"],
       "@/api/*":["src/common/api/*"],
       "@/common/*":["src/common/*"],
+      "@/tpls/*":["src/tpls/*"],
       "@/images/*":["src/assets/images/*"]
     }
   },

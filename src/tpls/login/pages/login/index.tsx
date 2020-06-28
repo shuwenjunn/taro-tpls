@@ -4,6 +4,8 @@ import { Button, Form, Input, View } from '@tarojs/components'
 import styles from './style.module.less'
 import SlideVerification from '../../plugin/slideVerification'
 import * as service from '../../../../pages/login/service'
+import { setData } from '../../model'
+import { config } from '../../config'
 
 
 type PageStateProps = {}
@@ -108,9 +110,8 @@ export default class Index extends Component<IProps, PageState> {
     this.setState({ loading: false })
     if (status === 200) {
       API.setToken(result)
-      Taro.navigateTo({
-        url: '/pages/index/index'
-      })
+      setData(config.login.api.userNameLogin.model, result)
+      Taro.navigateBack()
     }
   }
 
@@ -151,9 +152,8 @@ export default class Index extends Component<IProps, PageState> {
       this.setState({ loading: false })
       if (status === 200) {
         API.setToken(result)
-        Taro.navigateTo({
-          url: '/pages/index/index'
-        })
+        setData(config.login.api.userNameLogin.model, result)
+        Taro.navigateBack()
       }
     }
 

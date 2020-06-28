@@ -1,10 +1,9 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { Image, View } from '@tarojs/components'
+import * as loginModel from '@/tpls/login/model'
 import styles from './style.module.less'
 import { config } from '../../config'
 import { setData } from '../../model'
-
-console.log('config', config)
 
 type PageStateProps = {}
 
@@ -13,6 +12,7 @@ type PageDispatchProps = {}
 type PageOwnProps = {}
 
 type PageState = {
+  renderFlag: boolean
   userinfo: {
     [propName: string]: string
   }
@@ -27,7 +27,8 @@ export default class Index extends Component<IProps, PageState> {
   constructor() {
     super()
     this.state = {
-      userinfo: {}
+      userinfo: {},
+      renderFlag: false
     }
   }
 
@@ -51,6 +52,13 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   componentDidShow() {
+    this.toggleFlag()
+  }
+
+  toggleFlag = () => {
+    this.setState({
+      renderFlag: !this.state.renderFlag
+    })
   }
 
   componentDidHide() {
@@ -89,20 +97,47 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   goUserInfo = () => {
-    Taro.navigateTo({
-      url: '/tpls/mine/pages/userinfo/index'
+    console.log('loginmodel.getData', loginModel.getData('token'))
+    if (loginModel.getData('token')) {
+      Taro.navigateTo({
+        url: '/tpls/mine/pages/userinfo/index'
+      })
+    } else {
+      Taro.navigateTo({
+        url: '/tpls/login/pages/login/index'
+      })
+    }
+
+  }
+
+  /**
+   * 退出登陆
+   */
+  exit = () => {
+    Taro.showActionSheet({
+      itemList: ['退出登录'],
+      itemColor:'#FF0000'
     })
+      .then(res => {
+        console.log(res.tapIndex)
+        if (res.tapIndex === 0) {
+          loginModel.setData('token', null)
+          this.toggleFlag()
+        }
+      })
+
   }
 
 
   render() {
     const { userinfo } = this.state
+    console.log('adsfadsafsdadfsasdf', loginModel.getData('token'))
     return (
       <View className={styles.index}>
         <View className={styles.header} onClick={this.goUserInfo.bind(this)}>
           <View className={styles.headerL}>
-            <Image className={styles.avatar} src={userinfo[config.mine.avatarKey] || 'https://i.loli.net/2020/06/24/PnCt3khiUGcR6qa.png'} />
-            <View className={styles.name}>{userinfo[config.mine.usernameKey] || '未登录'}</View>
+            <Image className={styles.avatar} src={(userinfo[config.mine.avatarKey] && loginModel.getData('token')) ? userinfo[config.mine.avatarKey] : 'https://i.loli.net/2020/06/28/P5GmX1uWwqnfTbv.png'} />
+            <View className={styles.name}>{loginModel.getData('token') ? (userinfo[config.mine.usernameKey] || '未设置用户名') : '未登录'}</View>
           </View>
           <Image className={styles.headerR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
         </View>
@@ -113,7 +148,7 @@ export default class Index extends Component<IProps, PageState> {
 
             <View className={styles.items}>
               {d.items.length > 0 && d.items.map(t => (
-                <View className={styles.it} style={{width:`${(100/d.maxCountInline)}%`}} key={t.desc} onClick={this.switchPage.bind(this, t)}>
+                <View className={styles.it} style={{ width: `${(100 / d.maxCountInline)}%` }} key={t.desc} onClick={this.switchPage.bind(this, t)}>
                   <Image className={styles.icon} src={t.iconPath} />
                   <View className={styles.desc}>{t.desc}</View>
                 </View>
@@ -137,10 +172,11 @@ export default class Index extends Component<IProps, PageState> {
           </View>
         ))}
 
-
-        <View className={styles.exit}>
-          退出登陆
-        </View>
+        {loginModel.getData('token') && (
+          <View className={styles.exit} onClick={this.exit.bind(this)}>
+            退出登陆
+          </View>
+        )}
       </View>
     )
   }

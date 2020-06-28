@@ -1,5 +1,4 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import API from '@/api/request'
 import { Image, View, Picker } from '@tarojs/components'
 import styles from './style.module.less'
 import { config } from '../../config'
@@ -51,12 +50,10 @@ export default class Index extends Component<IProps, PageState> {
    * @param data 页面参数
    */
   switchPage = (data: any) => {
-    console.log('ttttttttt', data.targetPath)
     let url = data.targetPath
     if (data.params) {
       url += '?params=' + JSON.stringify(data.params)
     }
-    console.log('url---------->>', url)
     Taro.navigateTo({
       url: url
     })

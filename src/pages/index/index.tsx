@@ -76,7 +76,7 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    console.log(this.$router.path)
+
   }
 
   componentWillUnmount() {
@@ -126,6 +126,7 @@ class Index extends Component {
   }
 
   render() {
+    console.log('getData(`token`)', getData(`token`))
     return (
       <View className='index'>
 
