@@ -1,9 +1,4 @@
-const globalData = {
-    userinfo: {
-        gender: 'man',
-        username: 'shuwenjun'
-    }
-}
+const globalData = {}
 
 export function setData(key, val) {
     globalData[key] = val

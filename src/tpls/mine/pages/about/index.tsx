@@ -56,7 +56,17 @@ export default class Index extends Component<IProps, PageState> {
             title: '自定义转发标题',
             path: '/page/user?id=123'
         }
-    } Î
+    }
+
+    switchPage = (data: any) => {
+        let url = data.targetPath
+        if (data.params) {
+            url += '?params=' + JSON.stringify(data.params)
+        }
+        Taro.navigateTo({
+            url: url
+        })
+    }
 
     render() {
 
@@ -68,7 +78,7 @@ export default class Index extends Component<IProps, PageState> {
 
                 <View className={styles.list} >
                     {config.about.list.length > 0 && config.about.list.map(t => (
-                        <View className={styles.it} key={t.desc}>
+                        <View className={styles.it} key={t.desc} onClick={this.switchPage.bind(this,t)}>
                             <View className={styles.itL}>
                                 <View className={styles.desc}>{t.desc}</View>
                             </View>

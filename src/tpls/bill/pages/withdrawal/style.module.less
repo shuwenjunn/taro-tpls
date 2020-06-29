@@ -1,0 +1,173 @@
+@import "../../../../app.less";
+
+
+.index {
+
+  .top {
+    padding: 0 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 1);
+    .box-shadow();
+
+    .subTitle {
+      padding-left: 30px;
+      margin-top: 45px;
+      color: @color-gray-1;
+      font-size: @font-lv-3;
+    }
+
+    .inputArea {
+      height: 100px;
+      padding: 24px 30px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid @color-border-bottom;
+
+      .symbol {
+        font-size: 72px;
+        color: @color-gray-1;
+      }
+
+      .input {
+        height: 100px;
+        font-size: 72px;
+        color: @color-gray-1;
+      }
+
+      .placeholder {
+        color: @color-gray-3;
+        font-size: @font-lv-5;
+      }
+    }
+
+    .footer {
+      line-height: 60px;
+      padding-left: 44px;
+      color: @color-gray-3;
+      font-size: @font-lv-5;
+    }
+  }
+
+  .card {
+    padding: 0 16px;
+    margin-top: 31px;
+    .box-shadow();
+
+    .subTitle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 38px 18px 38px 48px;
+
+      .subTitleL {
+        font-size: @font-lv-3;
+        color: @color-gray-1;
+      }
+
+      .subTitleR {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: @base-color;
+          margin-right: 10px;
+          overflow:hidden;
+          font-size: @font-lv-5;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          image{
+            width: 24px;
+            height: 24px;
+            display: block;
+          }
+        }
+
+        .text {
+          color: @color-gray-3;
+          font-size: @font-lv-5;
+        }
+      }
+    }
+
+    .cardArea {
+      padding-left: 52px;
+      padding-right: 14px;
+      border-bottom: 1px solid @color-border-bottom;
+      padding-bottom: 10px;
+
+      .cardIt {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+
+        .l {
+          font-size: @font-lv-5;
+          color: @color-gray-1;
+        }
+
+        .r {
+          display: flex;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: linear-gradient(90deg, @bg-start-color 0%, @bg-end-color 100%);
+        }
+      }
+    }
+
+    .other {
+      padding-left: 52px;
+      padding-right: 14px;
+      padding-top: 10px;
+      padding-bottom: 30px;
+
+      .it {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
+
+        .l {
+          display: flex;
+          align-items: center;
+          font-size: @font-lv-3;
+          color: @color-gray-1;
+
+          .icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: @base-color;
+            margin-right: 20px;
+          }
+
+        }
+
+        .r {
+          font-size: @font-lv-5;
+          color: @color-gray-3;
+        }
+      }
+    }
+  }
+
+  .submit {
+    margin: 113px auto;
+    width: 687px;
+    height: 81px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, @bg-start-color 0%, @bg-end-color 100%);
+    border-radius: 47px;
+    color: #ffffff;
+    font-size: @font-lv-3;
+  }
+}
+

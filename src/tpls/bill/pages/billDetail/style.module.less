@@ -1,0 +1,126 @@
+@import "../../../../app.less";
+
+
+.index {
+  min-height: 100vh;
+  background: #FCFCFC;
+
+  .top {
+    padding-top: 60px;
+    background: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+
+    .type {
+      color: @color-gray-1;
+      font-size: @font-lv-3;
+      line-height: 42px;
+      font-weight: 600;
+    }
+
+    .money {
+      line-height: 67px;
+      margin-top: 20px;
+      font-size: 48px;
+      color: @color-gray-1;
+      font-weight: 600;
+    }
+
+    .status {
+      margin-top: 10px;
+      color: @color-gray-3;
+      font-size: @font-lv-3;
+      font-weight: 600;
+    }
+  }
+
+  .info {
+    background: #ffffff;
+    padding-left: 32px;
+
+    .it {
+      height: 104px;
+      display: flex;
+      border-bottom: 1px solid @color-border-bottom;
+      align-items: center;
+
+      .label {
+        color: @color-gray-5;
+        font-size: @font-lv-3;
+        width: 162px;
+        font-weight: 500;
+      }
+
+      .value {
+        fongt-size: @font-lv-4;
+        color: @color-gray-1;
+        font-weight: 400;
+      }
+    }
+
+    .uni {
+      align-items: flex-start;
+      height: auto;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      .label {
+        line-height: 104px;
+      }
+
+      .step {
+        margin-top: 30px;
+        &:first-child {
+          margin-top: 20px;
+        }
+
+        .logisticsIt {
+          position: relative;
+          padding: 0 0 20px;
+
+          .line {
+            position: absolute;
+            left: 12px;
+            top: 11px;
+            height: 100%;
+            border-left: 2px solid @base-color;
+            &.gray{
+              border-color: #D2D2D2;
+            }
+          }
+
+          .dot {
+            position: absolute;
+            box-sizing: border-box;
+            width: 26px;
+            height: 26px;
+            border-radius: 100px;
+            background: linear-gradient(90deg, @bg-start-color 0%, @bg-end-color 100%);
+            color: #5c89e4;
+            top: 11px;
+            &.gray{
+              background: #fff;
+              border: 2px solid #D2D2D2;
+            }
+          }
+
+          .content {
+            margin: 0 0 0 44px;
+            position: relative;
+            top: 6px;
+            word-break: break-all;
+            font-size: @font-lv-5;
+            line-height: 36px;
+            color: @base-color;
+
+            &.gray{
+              color: @color-gray-3;
+            }
+          }
+        }
+      }
+
+
+    }
+  }
+}
+

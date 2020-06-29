@@ -33,7 +33,44 @@ export const config: Iconfig = {
                 {
                     iconPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
                     desc: '待发货',
-                    targetPath: '/pages/login/index',
+                    targetPath: '/pages/addressList/index',
+                    params: {
+                        aaa: '1234'
+                    }
+                },
+                {
+                    iconPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
+                    desc: '待收货',
+                    targetPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
+                    params: {
+                        aaa: '1234'
+                    }
+                },
+                {
+                    iconPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
+                    desc: '已完成',
+                    targetPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
+                    params: {
+                        aaa: '1234'
+                    }
+                },
+            ]
+        }, {
+            subTitle: '我的订单',
+            maxCountInline: 4,
+            items: [
+                {
+                    iconPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
+                    desc: '待付款',
+                    targetPath: '/pages/addressList/index',
+                    params: {
+                        aaa: '1234'
+                    }
+                },
+                {
+                    iconPath: 'https://i.loli.net/2020/06/24/uKgMtAUQrB1iIZR.png',
+                    desc: '待发货',
+                    targetPath: '/pages/addressList/index',
                     params: {
                         aaa: '1234'
                     }
@@ -71,14 +108,37 @@ export const config: Iconfig = {
                 {
                     iconPath: 'https://i.loli.net/2020/06/24/H6G8EC5glDJT2IY.png',
                     desc: '常见问题',
-                    targetPath: '',
+                    targetPath: '/tpls/mine/pages/about/index',
                 },
                 {
                     iconPath: 'https://i.loli.net/2020/06/24/H6G8EC5glDJT2IY.png',
                     desc: '关于我们',
                     targetPath: '/tpls/mine/pages/about/index',
                 },
-            ]
+            ],
+
+            [
+                {
+                    iconPath: 'https://i.loli.net/2020/06/24/H6G8EC5glDJT2IY.png',
+                    desc: '修改密码',
+                    targetPath: '/tpls/login/pages/setPassword/index',
+                },
+                {
+                    iconPath: 'https://i.loli.net/2020/06/24/H6G8EC5glDJT2IY.png',
+                    desc: '联系客服',
+                    targetPath: 'tpls/bank/pages/bank/index',
+                },
+                {
+                    iconPath: 'https://i.loli.net/2020/06/24/H6G8EC5glDJT2IY.png',
+                    desc: '常见问题',
+                    targetPath: '/tpls/mine/pages/about/index',
+                },
+                {
+                    iconPath: 'https://i.loli.net/2020/06/24/H6G8EC5glDJT2IY.png',
+                    desc: '关于我们',
+                    targetPath: '/tpls/mine/pages/about/index',
+                },
+            ],
         ],
         api: {
             getUserInfo: {
@@ -113,7 +173,7 @@ export const config: Iconfig = {
             },
             {
                 desc: '隐私政策',
-                targetPath: 'fasfda'
+                targetPath: '/pages/index/index',
             },
         ]
     },
