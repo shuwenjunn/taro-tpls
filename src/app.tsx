@@ -50,9 +50,9 @@ class App extends Component {
       'tpls/bank/pages/addBank/index',
 
       // 账单模块
-      // 'tpls/bill/pages/billList/index',
-      // 'tpls/bill/pages/withdrawal/index',
-      // 'tpls/bill/pages/billDetail/index',
+      'tpls/bill/pages/billList/index',
+      'tpls/bill/pages/withdrawal/index',
+      'tpls/bill/pages/billDetail/index',
     ],
     window: {
       backgroundTextStyle: 'light',
