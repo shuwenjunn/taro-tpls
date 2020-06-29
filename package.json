@@ -1,8 +1,8 @@
 {
-	"name": "taro-app",
+	"name": "fdas",
 	"version": "1.0.0",
 	"private": true,
-	"description": "y",
+	"description": "fdsa",
 	"templateInfo": {
 		"name": "redux",
 		"typescript": true,
@@ -42,7 +42,6 @@
 		"@tarojs/taro-swan": "2.2.9",
 		"@tarojs/taro-tt": "2.2.9",
 		"@tarojs/taro-weapp": "2.2.9",
-		"axios": "^0.19.2",
 		"babel-runtime": "^6.26.0",
 		"moment": "^2.27.0",
 		"nerv-devtools": "^1.5.7",
@@ -55,6 +54,8 @@
 	},
 	"devDependencies": {
 		"@tarojs/mini-runner": "2.2.9",
+		"@tarojs/plugin-less": "2.2.9",
+		"@tarojs/plugin-terser": "2.2.9",
 		"@tarojs/webpack-runner": "2.2.9",
 		"@types/react": "^16.4.8",
 		"@types/webpack-env": "^1.13.6",
