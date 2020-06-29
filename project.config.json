@@ -1,13 +1,27 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "taro-app",
+	"projectname": "taro-redux-app",
 	"description": "y",
-	"appid": "wx7515a3e1dd99570f",
+	"appid": "wx67f26cbaa7e2356d",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
 		"postcss": false,
-		"minified": false
+		"preloadBackgroundData": false,
+		"minified": false,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
@@ -102,6 +116,27 @@
 					"id": -1,
 					"name": "pages/inde",
 					"pathName": "pages/login/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/bill/pages/billList/index",
+					"pathName": "tpls/bill/pages/billList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/bill/pages/withdrawal/index",
+					"pathName": "tpls/bill/pages/withdrawal/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/bill/pages/billDetail/index",
+					"pathName": "tpls/bill/pages/billDetail/index",
 					"scene": null
 				}
 			]

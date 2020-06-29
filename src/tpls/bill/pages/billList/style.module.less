@@ -1,0 +1,132 @@
+@import "../../../../app.less";
+
+
+.index {
+  height: 100vh;
+
+  .header {
+    color: #ffffff;
+    padding: 0 32px;
+    height: 335px;
+    background: linear-gradient(90deg, @bg-start-color 0%, @bg-end-color);
+    border-radius: 2px;
+
+    .name {
+      padding-top: 86px;
+      font-size: @font-lv-5;
+      margin-bottom: 30px;
+    }
+
+    .money {
+
+      display: flex;
+      justify-content: space-between;
+
+      .moneyL {
+        display: inline-block;
+        vertical-align: bottom;
+
+        .symbol {
+          font-size: @font-lv-3;
+        }
+
+        .number {
+          font-size: 72px;
+        }
+
+        .float {
+          font-size: 48px;
+        }
+      }
+
+      .moneyR {
+        width: 200px;
+        height: 88px;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 7px 64px 0px rgba(0, 0, 0, 0.07);
+        border-radius: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: @font-lv-3;
+        color: @base-color;
+      }
+    }
+  }
+
+  .subTitle {
+    background: #ffffff;
+    padding-left: 32px;
+    font-size: @font-lv-3;
+    line-height: 110px;
+  }
+
+  .scrollView {
+    height: calc(100% - 335px - 110px);
+    overflow-y: scroll;
+
+    .bar {
+      padding: 0 30px 0 36px;
+      height: 88px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #F6F7F8;
+      position: sticky;
+      top: 0;
+
+      .select {
+        display: flex;
+        align-items: center;
+
+        .month {
+
+          font-size: @font-lv-5;
+          color: @color-gray-1;
+        }
+
+        .icon {
+          width: 24px;
+          height: 19px;
+          display: block;
+          margin-left: 12px;
+        }
+      }
+
+      .statistic {
+        display: flex;
+        align-items: center;
+        font-size: @font-lv-5;
+        color: @color-gray-1;
+
+        .income {
+          margin-right: 12px;
+        }
+      }
+    }
+
+    .item {
+      margin-left: 32px;
+      width: calc(100% - 32px);
+      box-sizing: border-box;
+      padding: 30px 30px 25px 0;
+      border-bottom: 1px solid @color-border-bottom;
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        color: @color-gray-1;
+        font-size: @font-lv-3;
+      }
+
+      .bottom {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        color: @color-gray-3;
+        font-size: @font-lv-5;
+      }
+    }
+  }
+}
+

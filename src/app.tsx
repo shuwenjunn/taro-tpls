@@ -35,7 +35,7 @@ class App extends Component {
       'pages/addressList/index',
       'pages/addAddress/index',
       'pages/editAddress/index',
-      'pages/login/index',
+      // 'pages/login/index',
       'tpls/login/pages/login/index',
       'tpls/login/pages/regist/index',
       'tpls/login/pages/setPassword/index',
@@ -44,11 +44,15 @@ class App extends Component {
       'tpls/mine/pages/mine/index',
       'tpls/mine/pages/about/index',
       'tpls/mine/pages/userinfo/index',
-      'tpls/mine/pages/modifyNick/index',
 
       // 银行卡模块
       'tpls/bank/pages/bank/index',
       'tpls/bank/pages/addBank/index',
+
+      // 账单模块
+      'tpls/bill/pages/billList/index',
+      'tpls/bill/pages/withdrawal/index',
+      'tpls/bill/pages/billDetail/index',
     ],
     window: {
       backgroundTextStyle: 'light',

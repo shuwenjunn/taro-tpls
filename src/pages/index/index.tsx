@@ -1,9 +1,9 @@
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import { getData } from '../../tpls/login/model'
-import { add, minus, asyncAdd } from '../../store/actions/counter'
+import {ComponentClass} from 'react'
+import Taro, {Component, Config} from '@tarojs/taro'
+import {View, Button, Text} from '@tarojs/components'
+import {connect} from '@tarojs/redux'
+import {getData} from '../../tpls/login/model'
+import {add, minus, asyncAdd} from '../../store/actions/counter'
 
 
 // #region 书写注意
@@ -38,7 +38,7 @@ interface Index {
   props: IProps
 }
 
-@connect(({ counter }) => ({
+@connect(({counter}) => ({
   counter
 }), (dispatch) => ({
   add() {
@@ -125,6 +125,12 @@ class Index extends Component {
     })
   }
 
+  goBill = () => {
+    Taro.navigateTo({
+      url: '/tpls/bill/pages/billList/index',
+    })
+  }
+
   render() {
     console.log('getData(`token`)', getData(`token`))
     return (
@@ -159,6 +165,12 @@ class Index extends Component {
           onClick={this.goBank.bind(this)}
         >
           银行卡
+        </Button>
+        <Button
+          type='primary'
+          onClick={this.goBill.bind(this)}
+        >
+          账单
         </Button>
       </View>
     )
