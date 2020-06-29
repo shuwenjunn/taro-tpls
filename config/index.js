@@ -14,21 +14,8 @@ const config = {
     "@/images": "src/assets/images",
     "@/api": "src/common/api",
     "@/common": "src/common",
-    "@/tpls": "src/tpls"
+    "@/tpls": "src/tpls",
   },
-  plugins: [
-    // 引入 npm 安装的插件
-    "@tarojs/plugin-less",
-    // 引入 npm 安装的插件，并传入插件参数
-    // ['@tarojs/plugin-mock', {
-    //   mocks: {
-    //     '/api/user/1': {
-    //       name: 'judy',
-    //       desc: 'Mental guy'
-    //     }
-    //   }
-    // }],
-  ],
   babel: {
     sourceMap: true,
     presets: [
@@ -42,14 +29,15 @@ const config = {
     plugins: [
       "transform-decorators-legacy",
       "transform-class-properties",
-      "transform-object-rest-spread"[
-        ("transform-runtime",
+      "transform-object-rest-spread",
+      [
+        "transform-runtime",
         {
           helpers: false,
           polyfill: false,
           regenerator: true,
           moduleName: "babel-runtime"
-        })
+        }
       ]
     ]
   },
