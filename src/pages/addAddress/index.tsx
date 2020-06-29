@@ -1,6 +1,6 @@
-import Taro, {Component, Config} from '@tarojs/taro'
-import {View, Switch, Input, Button, Form} from '@tarojs/components'
-import {AddressCardprops} from '../../components/AddressCard'
+import Taro, { Component, Config } from '@tarojs/taro'
+import { View, Switch, Input, Button, Form } from '@tarojs/components'
+import { AddressCardprops } from '../../components/AddressCard'
 import styles from './style.module.less'
 import RegionPicker from '../../components/RegionPicker'
 import RadioItem from '../../components/RadioItem'
@@ -35,6 +35,10 @@ class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, '
     }
   }
 
+  static options = {
+    addGlobalClass: true
+  }
+
   config: Config = {
     navigationBarTitleText: '添加地址'
   }
@@ -55,11 +59,11 @@ class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, '
   onFormItemChange = (e: any) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
-    this.setState({[`${e.target.id}`]: e.detail.value})
+    this.setState({ [`${e.target.id}`]: e.detail.value })
   }
 
   changeGender = (gender) => {
-    this.setState({gender})
+    this.setState({ gender })
   }
 
   onSwitchChange = (e) => {
@@ -69,8 +73,8 @@ class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, '
   }
 
   onSubmit = (e) => {
-    const {address, contact, phone} = e.detail.value
-    const {isDefault, gender, city} = this.state
+    const { address, contact, phone } = e.detail.value
+    const { isDefault, gender, city } = this.state
     if (!city) {
       Taro.showToast({
         title: '请输入地区',
@@ -104,7 +108,7 @@ class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, '
       return
     }
     const addressData = Taro.getStorageSync('addressData') ? JSON.parse(Taro.getStorageSync('addressData')) : []
-    addressData.push({...e.detail.value, isDefault, gender, city})
+    addressData.push({ ...e.detail.value, isDefault, gender, city })
     Taro.setStorageSync('addressData', JSON.stringify(addressData))
     Taro.navigateBack()
   }
@@ -118,11 +122,11 @@ class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, '
   }
 
   onGetRadioValue = (value: string) => {
-    this.setState({gender: value as AddressCardprops['gender']})
+    this.setState({ gender: value as AddressCardprops['gender'] })
   }
 
   render() {
-    const {city, address, contact, phone} = this.state
+    const { city, address, contact, phone } = this.state
 
     return (
       <View className={styles.wrapper}>
@@ -153,7 +157,7 @@ class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, '
 
           <RadioItem
             onGetRadioValue={this.onGetRadioValue.bind(this)}
-            radioData={[{text: '男士', value: 'man'}, {text: '女士', value: 'woman'}]}
+            radioData={[{ text: '男士', value: 'man' }, { text: '女士', value: 'woman' }]}
             initValue='man'
           />
 

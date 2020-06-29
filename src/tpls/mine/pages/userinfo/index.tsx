@@ -1,7 +1,10 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { Image, View, Picker } from '@tarojs/components'
+import { Image, View, Picker, Button, Input } from '@tarojs/components'
+import { AtModal, AtModalHeader, AtModalContent, AtModalAction } from "taro-ui"
+import "taro-ui/dist/style/components/modal.scss"
 import styles from './style.module.less'
 import { config } from '../../config'
+import * as model from '../../model'
 
 console.log('config', config)
 
@@ -11,7 +14,10 @@ type PageDispatchProps = {}
 
 type PageOwnProps = {}
 
-type PageState = {}
+type PageState = {
+  gender: number
+  visible: boolean
+}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
@@ -21,7 +27,10 @@ export default class Index extends Component<IProps, PageState> {
 
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      gender: 0,
+      visible: false,
+    }
   }
 
   componentDidMount() {
@@ -39,9 +48,9 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   // 修改昵称
-  goModifyNickname = () => {
-    Taro.navigateTo({
-      url: `/tpls/mine/pages/modifyNick/index`
+  modifyNickName = () => {
+    this.setState({
+      visible: true
     })
   }
 
@@ -63,9 +72,14 @@ export default class Index extends Component<IProps, PageState> {
     console.log('33333', e)
   }
 
+  onSubmit = () => {
+    this.setState({ visible: false })
+  }
+
 
   render() {
     console.log('config.userinfo.list', config.userinfo.list)
+    const { gender, visible } = this.state
     return (
       <View className={styles.index}>
 
@@ -79,7 +93,7 @@ export default class Index extends Component<IProps, PageState> {
             </View>
           </View>
 
-          <View className={styles.it} onClick={this.goModifyNickname.bind(this)}>
+          <View className={styles.it} onClick={this.modifyNickName.bind(this)}>
             <View className={styles.itL}>
               <View className={styles.desc}>昵称</View>
             </View>
@@ -94,7 +108,7 @@ export default class Index extends Component<IProps, PageState> {
                 <View className={styles.desc}>性别</View>
               </View>
               <View className={styles.itR}>
-                <View className={styles.value}>{config.userinfo.genderMap[config.userinfo.genderKey]}</View>
+                <View className={styles.value}>{config.userinfo.genderMap[model.getData('userinfo')[config.userinfo.genderKey]] || '未知'}</View>
                 <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
               </View>
             </View>
@@ -117,6 +131,18 @@ export default class Index extends Component<IProps, PageState> {
             ))}
           </View>
         ))}
+
+        <AtModal
+          isOpened={visible}
+        >
+          <AtModalHeader>修改昵称</AtModalHeader>
+          <View className={styles.atModalContent}>
+            <Input className={styles.input} placeholder='请输入昵称' />
+          </View>
+          <AtModalAction>
+            <View className={styles.submit} onClick={this.onSubmit.bind(this)}>确定</View>
+          </AtModalAction>
+        </AtModal>
       </View>
     )
   }

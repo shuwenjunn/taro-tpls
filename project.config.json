@@ -97,6 +97,12 @@
 					"pathName": "tpls/bank/pages/addBank/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/inde",
+					"pathName": "pages/login/index",
+					"scene": null
 				}
 			]
 		}

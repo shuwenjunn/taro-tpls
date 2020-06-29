@@ -3,7 +3,7 @@ import { Image, View } from '@tarojs/components'
 import * as loginModel from '@/tpls/login/model'
 import styles from './style.module.less'
 import { config } from '../../config'
-import { setData } from '../../model'
+import { setData, getData } from '../../model'
 
 type PageStateProps = {}
 
@@ -13,9 +13,6 @@ type PageOwnProps = {}
 
 type PageState = {
   renderFlag: boolean
-  userinfo: {
-    [propName: string]: string
-  }
 }
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
@@ -27,7 +24,6 @@ export default class Index extends Component<IProps, PageState> {
   constructor() {
     super()
     this.state = {
-      userinfo: {},
       renderFlag: false
     }
   }
@@ -40,9 +36,6 @@ export default class Index extends Component<IProps, PageState> {
     const { status, result } = await config.mine.api.getUserInfo.service()
     if (status === 'ok') {
       config.mine.api.getUserInfo.model && setData(config.mine.api.getUserInfo.model, result)
-      this.setState({
-        userinfo: result
-      })
     }
 
   }
@@ -116,7 +109,7 @@ export default class Index extends Component<IProps, PageState> {
   exit = () => {
     Taro.showActionSheet({
       itemList: ['退出登录'],
-      itemColor:'#FF0000'
+      itemColor: '#FF0000'
     })
       .then(res => {
         console.log(res.tapIndex)
@@ -130,7 +123,7 @@ export default class Index extends Component<IProps, PageState> {
 
 
   render() {
-    const { userinfo } = this.state
+    const userinfo = getData('userinfo')
     console.log('adsfadsafsdadfsasdf', loginModel.getData('token'))
     return (
       <View className={styles.index}>
