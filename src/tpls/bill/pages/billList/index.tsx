@@ -3,7 +3,7 @@ import moment from 'moment'
 import {View, Text, Image, Picker} from '@tarojs/components'
 import "taro-ui/dist/style/components/float-layout.scss"
 import styles from './style.module.less'
-import {config} from '../../config'
+// import {config} from '../../config'
 import selectIcon from '../../assets/images/select.svg'
 
 type PageStateProps = {}

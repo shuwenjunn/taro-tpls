@@ -17,7 +17,7 @@ interface BlockConfig {
     /**
      * 图标路径
      */
-    iconPath: string
+    iconPath: any
     /**
      * 描述
      */
@@ -44,8 +44,8 @@ export default interface MineConfig {
     iconPath: string
     desc: string
     /**
-    * 跳转目标路径
-    */
+     * 跳转目标路径
+     */
     targetPath: string
     /**
      * 跳转参数

@@ -58,7 +58,7 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   /**
-   * 
+   *
    * @param res 分享
    */
   onShareAppMessage(res) {
