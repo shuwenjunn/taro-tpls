@@ -74,15 +74,16 @@
           border-radius: 50%;
           background: @base-color;
           margin-right: 10px;
-          overflow:hidden;
+          overflow: hidden;
           font-size: @font-lv-5;
           color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
-          image{
-            width: 24px;
-            height: 24px;
+
+          image {
+            width: 30px;
+            height: 30px;
             display: block;
           }
         }
@@ -117,6 +118,18 @@
           height: 34px;
           border-radius: 50%;
           background: linear-gradient(90deg, @bg-start-color 0%, @bg-end-color 100%);
+          box-sizing: border-box;
+
+          image{
+            width: 34px;
+            height: 34px;
+            display: block;
+          }
+
+          &.disabled {
+            border: 2px solid @radio-border-color;
+            background: #fff;
+          }
         }
       }
     }
