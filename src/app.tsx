@@ -1,15 +1,12 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 import 'taro-ui/dist/style/index.scss'
-import tpls from './tplsRegist'
 
 import Index from './pages/index'
 
 import configStore from './store'
 
-import './app.less'
 
-console.log('tpls--------->>>',tpls)
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：

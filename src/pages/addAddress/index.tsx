@@ -2,6 +2,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Switch, Input, Button, Form } from '@tarojs/components'
 import { AddressCardprops } from '../../components/AddressCard'
 import styles from './style.module.less'
+import appStyle from '../../app.less'
 import RegionPicker from '../../components/RegionPicker'
 import RadioItem from '../../components/RadioItem'
 
@@ -173,7 +174,7 @@ class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, '
             className={styles.switch}
             checked={this.state.isDefault}
             onChange={this.onSwitchChange}
-            color='#0f89ec'
+            color={appStyle.baseColor}
           />
         </View>
       </View>
