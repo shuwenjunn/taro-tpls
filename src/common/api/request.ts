@@ -44,7 +44,7 @@ class Request {
   }
 
   private getSignature(params: any): string {
-    // goto
+    // todo
     let sign = ''
     for (const val of params) {
       sign += val

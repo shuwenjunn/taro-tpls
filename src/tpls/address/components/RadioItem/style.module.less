@@ -1,13 +1,11 @@
-
 @import '../../../../app.less';
+
 .radio {
   display: flex;
   align-items: center;
-  box-sizing: border-box;
   width: calc(750px - 64px);
   height: 106px;
   margin: 0 auto;
-  box-sizing: border-box;
   padding-left: 162px;
   border-bottom: 1px solid #eeeeee;
 
@@ -15,10 +13,12 @@
     display: flex;
     align-items: center;
     margin-right: 53px;
+    box-sizing: border-box;
 
     .icon {
       width: 34px;
       height: 34px;
+      box-sizing: border-box;
       background-image: linear-gradient(90deg,
       @bg-start-color 0%,
       @bg-end-color 100%);
@@ -27,7 +27,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-
       .icon {
         width: 20px;
         display: block;
@@ -36,7 +35,7 @@
 
       &.uncheck {
         background: #ffffff;
-        border: 1px solid #d2d2d2;
+        border: 2px solid #d2d2d2;
       }
     }
 

@@ -75,6 +75,11 @@ export const config: Iconfig = {
         },
         {
           iconPath: require(`./assets/images/icon-${mainStyles.theme}.png`),
+          desc: '地址管理',
+          targetPath: '/tpls/address/pages/addressList/index',
+        },
+        {
+          iconPath: require(`./assets/images/icon-${mainStyles.theme}.png`),
           desc: '常见问题',
           targetPath: '/tpls/mine/pages/about/index',
         },

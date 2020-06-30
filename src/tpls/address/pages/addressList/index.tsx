@@ -58,7 +58,7 @@ class Index extends Component <PageOwnProps, PageState> {
 
   goAddAddress() {
     Taro.navigateTo({
-      url: '/pages/addAddress/index'
+      url: '/tpls/address/pages/addAddress/index'
     })
   }
 
@@ -83,7 +83,6 @@ class Index extends Component <PageOwnProps, PageState> {
             onSelect={this.onSelect.bind(this)}
           />
         ))}
-
         <View className={styles.submit} onClick={this.goAddAddress.bind(this)}>添加地址</View>
       </View>
     )

@@ -20,13 +20,12 @@ export class AddressCard extends Component<AddressCardprops, {}> {
   goEditAddress = (e) => {
     e.stopPropagation()
     Taro.navigateTo({
-      url: '/pages/editAddress/index?data=' + JSON.stringify(this.props)
+      url: '/tpls/address/pages/addAddress/index?data=' + JSON.stringify(this.props)
     })
   }
 
 
   render() {
-    console.log('this.props', this.props)
     return (
       <View className={styles.address_card} onClick={() => this.props.onSelect(this.props)}>
         <View className={styles.header}>

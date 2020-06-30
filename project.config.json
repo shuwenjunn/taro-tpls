@@ -67,6 +67,13 @@
 					"id": -1,
 					"name": "tpls/bill/pages/billList/index",
 					"pathName": "tpls/bill/pages/billList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/address/pages/addAddress/index",
+					"pathName": "tpls/address/pages/addAddress/index",
 					"scene": null
 				}
 			]
