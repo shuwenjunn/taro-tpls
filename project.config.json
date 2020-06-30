@@ -60,6 +60,13 @@
 					"id": -1,
 					"name": "tpls/bill/pages/withdrawal/index",
 					"pathName": "tpls/bill/pages/withdrawal/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/bill/pages/billList/index",
+					"pathName": "tpls/bill/pages/billList/index",
 					"scene": null
 				}
 			]
