@@ -142,7 +142,7 @@ export default class Index extends Component<IProps, PageState> {
 
         {config.mine.blocks.length > 0 && config.mine.blocks.map(d => (
           <View className={styles.card} key={d.subTitle}>
-            <View className={styles.subtitle}>我的订单</View>
+            <View className={styles.subtitle}>{d.subTitle}</View>
 
             <View className={styles.items}>
               {d.items.length > 0 && d.items.map(t => (

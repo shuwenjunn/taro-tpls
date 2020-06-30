@@ -74,6 +74,13 @@
 					"id": -1,
 					"name": "tpls/address/pages/addAddress/index",
 					"pathName": "tpls/address/pages/addAddress/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/mine/pages/userinfo/index",
+					"pathName": "tpls/mine/pages/userinfo/index",
 					"scene": null
 				}
 			]
