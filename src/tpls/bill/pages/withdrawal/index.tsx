@@ -6,8 +6,6 @@ import styles from './style.module.less'
 import {config} from '../../config'
 
 
-console.log('config', config)
-
 type PageStateProps = {}
 
 type PageDispatchProps = {}

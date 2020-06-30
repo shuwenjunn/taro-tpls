@@ -6,8 +6,6 @@ import shenglueIcon from '../../assets/images/shenglue.svg'
 import styles from './style.module.less'
 import {config} from '../../config'
 
-console.log('config', config)
-
 type PageStateProps = {}
 
 type PageDispatchProps = {}
@@ -63,7 +61,6 @@ export default class Index extends Component<IProps, PageState> {
     ]
 
     const {type} = this.state
-    console.log('type', type)
     return (
       <View className={styles.index}>
         <View className={styles.top}>

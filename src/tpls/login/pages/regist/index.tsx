@@ -135,7 +135,6 @@ export default class Index extends Component<IProps, PageState> {
   //---------------------图片验证码--------------
   /* 校验成功的回调函数 */
   verifyResult = async (res) => {
-    console.log(res)
     if (!res.flag) {
       return
     }
@@ -158,7 +157,6 @@ export default class Index extends Component<IProps, PageState> {
 
   onRef = (ref) => {
     this.SlideVerification = ref
-    console.log(ref)
   }
 
   //---------------------图片验证码--------------

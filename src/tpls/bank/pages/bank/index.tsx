@@ -5,8 +5,6 @@ import "taro-ui/dist/style/components/float-layout.scss"
 import styles from './style.module.less'
 import { config } from '../../config'
 
-console.log('config', config)
-
 type PageStateProps = {}
 
 type PageDispatchProps = {}
@@ -50,10 +48,6 @@ export default class Index extends Component<IProps, PageState> {
 
   getCardList = async () => {
     const { status, result } = await config.bank.api.getCardList.service()
-  }
-
-  onConfirm = (e) => {
-    console.log('eeee', e)
   }
 
   goAddCard = () => {

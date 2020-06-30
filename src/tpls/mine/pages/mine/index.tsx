@@ -94,7 +94,6 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   goUserInfo = () => {
-    console.log('loginmodel.getData', loginModel.getData('token'))
     if (loginModel.getData('token')) {
       Taro.navigateTo({
         url: '/tpls/mine/pages/userinfo/index'
@@ -116,7 +115,6 @@ export default class Index extends Component<IProps, PageState> {
       itemColor: '#FF0000'
     })
       .then(res => {
-        console.log(res.tapIndex)
         if (res.tapIndex === 0) {
           loginModel.setData('token', null)
           this.toggleFlag()
@@ -128,7 +126,6 @@ export default class Index extends Component<IProps, PageState> {
 
   render() {
     const userinfo = getData('userinfo')
-    console.log('adsfadsafsdadfsasdf', loginModel.getData('token'))
     return (
       <View className={styles.index}>
         <View className={styles.header} onClick={this.goUserInfo.bind(this)}>

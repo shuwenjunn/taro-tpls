@@ -4,7 +4,7 @@ import {View, Button, Text} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
 import {getData} from '../../tpls/login/model'
 import {add, minus, asyncAdd} from '../../store/actions/counter'
-
+import RadioIt from "../../components/RadioIt/index";
 
 // #region 书写注意
 //
@@ -83,7 +83,6 @@ class Index extends Component {
   }
 
   componentDidShow() {
-    console.log(Taro.getStorageSync('currAddress'))
     this.setState({
       currAddress: Taro.getStorageSync('currAddress') ? JSON.parse(Taro.getStorageSync('currAddress')) : {}
     })
@@ -98,7 +97,6 @@ class Index extends Component {
         resolve('1111')
       }, 1000)
     })
-    console.log(a)
   }
 
   goSelect = () => {
@@ -138,7 +136,6 @@ class Index extends Component {
   }
 
   render() {
-    console.log('getData(`token`)', getData(`token`))
     return (
       <View className='index'>
 
@@ -185,6 +182,8 @@ class Index extends Component {
         >
           webview
         </Button>
+
+        <RadioIt isCheck={true}/>
       </View>
     )
   }

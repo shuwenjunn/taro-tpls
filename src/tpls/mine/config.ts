@@ -7,9 +7,6 @@ import ModifyNickConfig from './types/modifyNick'
 import mainStyles from '../../app.less'
 
 
-console.log('mainfadsfadsf', mainStyles.theme)
-
-
 type Iconfig = {
   mine: MineConfig
   about: AboutConfig

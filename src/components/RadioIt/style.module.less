@@ -1,0 +1,23 @@
+@import "../../app";
+
+.radio {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, @bg-start-color 0%, @bg-end-color 100%);
+
+  &.disabled {
+    background: #ffffff;
+    border: 2px solid #D2D2D2;
+  }
+
+  image {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}

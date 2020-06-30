@@ -26,7 +26,6 @@ export default class RadioItem extends Component<RadioProps, Istate> {
   }
 
   onChange = (value) => {
-    console.log('onchange', value)
     this.setState({value})
     this.props.onGetRadioValue(value)
   }

@@ -6,8 +6,6 @@ import styles from './style.module.less'
 import {config} from '../../config'
 import * as model from '../../model'
 
-console.log('config', config)
-
 type PageStateProps = {}
 
 type PageDispatchProps = {}
@@ -75,7 +73,7 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   onSelect = (e) => {
-    console.log('33333', e)
+
   }
 
   onSubmit = () => {
@@ -84,7 +82,6 @@ export default class Index extends Component<IProps, PageState> {
 
 
   render() {
-    console.log('config.userinfo.list', config.userinfo.list)
     const {visible} = this.state
     return (
       <View className={styles.index}>

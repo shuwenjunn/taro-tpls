@@ -20,7 +20,6 @@ export default class SlideVerification extends Component {
   componentDidMount() {
     Taro.nextTick(() => {
       let size = this.state.size
-      console.log(this.state.size)
       this.getSize(".on-pathway").then((res1) => {
         size.pathway = res1;
         this.setState({

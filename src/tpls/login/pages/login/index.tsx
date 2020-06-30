@@ -76,7 +76,6 @@ export default class Index extends Component<IProps, PageState> {
 
   //账号密码登陆
   onUsernameLogin = async (values) => {
-    console.log('values', values)
     const {username, password} = values
     if (!username || !password) {
       Taro.showToast({
@@ -138,7 +137,6 @@ export default class Index extends Component<IProps, PageState> {
   //---------------------图片验证码--------------
   /* 校验成功的回调函数 */
   verifyResult = async (res) => {
-    console.log(res)
     if (!res.flag) {
       return
     }
@@ -160,7 +158,6 @@ export default class Index extends Component<IProps, PageState> {
       this.setState({verifyVisible: false})
       this.timmer = setInterval(() => {
         const {countdownTime} = this.state
-        console.log('countdownTime---------->>', countdownTime)
         if (countdownTime <= 1) {
           clearInterval(this.timmer)
           this.setState({countdownTime: 60})
@@ -178,7 +175,6 @@ export default class Index extends Component<IProps, PageState> {
 
   onRef = (ref) => {
     this.SlideVerification = ref
-    console.log(ref)
   }
 
   //---------------------图片验证码--------------

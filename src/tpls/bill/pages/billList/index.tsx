@@ -44,7 +44,6 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   onSelectMonth = (e) => {
-    console.log(e.detail.value)
     this.setState({
       date: e.detail.value
     })
