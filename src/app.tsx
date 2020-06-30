@@ -29,10 +29,13 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/index/index',
-      'pages/addressList/index',
-      'pages/addAddress/index',
-      'pages/editAddress/index',
-      // 'pages/login/index',
+      'pages/webview/index',
+
+      // 地址模块
+      'tpls/address/pages/addressList/index',
+      'tpls/address/pages/addAddress/index',
+
+      //登陆模块
       'tpls/login/pages/login/index',
       'tpls/login/pages/regist/index',
       'tpls/login/pages/setPassword/index',
@@ -54,7 +57,7 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarTitleText: '',
       navigationBarTextStyle: 'black'
     }
   }

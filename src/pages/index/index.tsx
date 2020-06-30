@@ -131,6 +131,12 @@ class Index extends Component {
     })
   }
 
+  goWebView = () => {
+    Taro.navigateTo({
+      url: '/pages/webview/index'
+    })
+  }
+
   render() {
     console.log('getData(`token`)', getData(`token`))
     return (
@@ -171,6 +177,13 @@ class Index extends Component {
           onClick={this.goBill.bind(this)}
         >
           账单
+        </Button>
+
+        <Button
+          type='primary'
+          onClick={this.goWebView.bind(this)}
+        >
+          webview
         </Button>
       </View>
     )

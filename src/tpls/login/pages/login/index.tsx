@@ -1,11 +1,10 @@
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, {Component, Config} from '@tarojs/taro'
 import API from '@/api/request'
-import { Button, Form, Input, View } from '@tarojs/components'
+import {Button, Form, Input, View} from '@tarojs/components'
 import styles from './style.module.less'
 import SlideVerification from '../../plugin/slideVerification'
-import * as service from '../../../../pages/login/service'
-import { setData } from '../../model'
-import { config } from '../../config'
+import {setData} from '../../model'
+import {config} from '../../config'
 
 
 type PageStateProps = {}
@@ -63,7 +62,7 @@ export default class Index extends Component<IProps, PageState> {
 
   //点击提交按钮
   onSubmit = (e) => {
-    const { loginType } = this.state
+    const {loginType} = this.state
     if (loginType === 'phone') {
       this.onPhoneLogin(e.detail.value)
     } else {
@@ -72,13 +71,13 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   onGetCode = () => {
-    this.setState({ verifyVisible: true })
+    this.setState({verifyVisible: true})
   }
 
   //账号密码登陆
   onUsernameLogin = async (values) => {
     console.log('values', values)
-    const { username, password } = values
+    const {username, password} = values
     if (!username || !password) {
       Taro.showToast({
         title: '请输入账号密码',
@@ -87,13 +86,13 @@ export default class Index extends Component<IProps, PageState> {
       })
       return
     }
-    this.setState({ verifyVisible: true, username, password })
+    this.setState({verifyVisible: true, username, password})
 
   }
 
   // 短信验证码登陆
   onPhoneLogin = async (values: { phone: string; code: string }) => {
-    const { phone, code } = values
+    const {phone, code} = values
     if (!phone || !code) {
       Taro.showToast({
         title: '请输入手机号和短信验证码',
@@ -104,10 +103,10 @@ export default class Index extends Component<IProps, PageState> {
     }
 
     // 伪代码
-    this.setState({ loading: true, verifyVisible: false })
-    const { username, password } = this.state
-    const { status, result } = await service.login({ username, password })
-    this.setState({ loading: false })
+    this.setState({loading: true, verifyVisible: false})
+    const {username, password} = this.state
+    const {status, result} = await config.login.api.userNameLogin.service(username, password)
+    this.setState({loading: false})
     if (status === 200) {
       API.setToken(result)
       setData(config.login.api.userNameLogin.model, result)
@@ -118,7 +117,7 @@ export default class Index extends Component<IProps, PageState> {
   onInput = (e) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
-    this.setState({ [`${e.target.id}`]: e.detail.value })
+    this.setState({[`${e.target.id}`]: e.detail.value})
   }
 
   /**
@@ -144,12 +143,12 @@ export default class Index extends Component<IProps, PageState> {
       return
     }
     this.verifyReset()
-    const { loginType } = this.state
+    const {loginType} = this.state
     if (loginType === 'username') {
-      this.setState({ loading: true, verifyVisible: false })
-      const { username, password } = this.state
-      const { status, result } = await service.login({ username, password })
-      this.setState({ loading: false })
+      this.setState({loading: true, verifyVisible: false})
+      const {username, password} = this.state
+      const {status, result} = await config.login.api.userNameLogin.service(username, password)
+      this.setState({loading: false})
       if (status === 200) {
         API.setToken(result)
         setData(config.login.api.userNameLogin.model, result)
@@ -158,15 +157,15 @@ export default class Index extends Component<IProps, PageState> {
     }
 
     if (loginType === 'phone') {
-      this.setState({ verifyVisible: false })
+      this.setState({verifyVisible: false})
       this.timmer = setInterval(() => {
-        const { countdownTime } = this.state
+        const {countdownTime} = this.state
         console.log('countdownTime---------->>', countdownTime)
         if (countdownTime <= 1) {
           clearInterval(this.timmer)
-          this.setState({ countdownTime: 60 })
+          this.setState({countdownTime: 60})
         } else {
-          this.setState({ countdownTime: countdownTime - 1 })
+          this.setState({countdownTime: countdownTime - 1})
         }
       }, 100)
     }
@@ -185,7 +184,7 @@ export default class Index extends Component<IProps, PageState> {
   //---------------------图片验证码--------------
 
   render() {
-    const { loginType, verifyVisible, phone, countdownTime } = this.state
+    const {loginType, verifyVisible, phone, countdownTime} = this.state
     return (
       <View className={styles.index}>
 
@@ -202,17 +201,17 @@ export default class Index extends Component<IProps, PageState> {
               <Input className={styles.input} name='username' type='text' placeholder='请输入账号' />
             </View>
           ) : (
-              <View className={styles.formItem}>
-                <Input
-                  className={styles.input}
-                  id='phone'
-                  name='phone'
-                  type='text'
-                  placeholder='请输入手机号'
-                  onInput={this.onInput.bind(this)}
-                />
-              </View>
-            )}
+            <View className={styles.formItem}>
+              <Input
+                className={styles.input}
+                id='phone'
+                name='phone'
+                type='text'
+                placeholder='请输入手机号'
+                onInput={this.onInput.bind(this)}
+              />
+            </View>
+          )}
 
           {loginType === 'phone' ? (
             <View className={styles.formItem}>
@@ -220,18 +219,18 @@ export default class Index extends Component<IProps, PageState> {
               {phone && countdownTime === 60 ? (
                 <View className={styles.codeBtn} onClick={this.onGetCode.bind(this)}>获取验证码</View>
               ) : (
-                  <View
-                    className={`${styles.codeBtn} ${styles.disabled}`}
-                  >
-                    {countdownTime < 60 ? countdownTime : '获取验证码'}
-                  </View>
-                )}
+                <View
+                  className={`${styles.codeBtn} ${styles.disabled}`}
+                >
+                  {countdownTime < 60 ? countdownTime : '获取验证码'}
+                </View>
+              )}
             </View>
           ) : (
-              <View className={styles.formItem}>
-                <Input className={styles.input} name='password' password placeholder='请输入登陆密码' />
-              </View>
-            )}
+            <View className={styles.formItem}>
+              <Input className={styles.input} name='password' password placeholder='请输入登陆密码' />
+            </View>
+          )}
           {loginType === 'username' && (
             <View className={styles.opts}>
               <View className={styles.optIt} onClick={this.goRegist.bind(this, '注册')}>注册账号</View>
@@ -250,8 +249,8 @@ export default class Index extends Component<IProps, PageState> {
           {loginType === 'username' ? (
             <View className={styles.toggle} onClick={this.switchLoginType.bind(this, 'phone')}>验证码登陆</View>
           ) : (
-              <View className={styles.toggle} onClick={this.switchLoginType.bind(this, 'username')}>账号密码登陆</View>
-            )}
+            <View className={styles.toggle} onClick={this.switchLoginType.bind(this, 'username')}>账号密码登陆</View>
+          )}
         </Form>
       </View>
     )

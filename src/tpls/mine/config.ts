@@ -38,7 +38,7 @@ export const config: Iconfig = {
         {
           iconPath: require(`./assets/images/order-${mainStyles.theme}.png`),
           desc: '待发货',
-          targetPath: '/pages/addressList/index',
+          targetPath: 'https://www.baidu.com/',
           params: {
             aaa: '1234'
           }
@@ -81,7 +81,7 @@ export const config: Iconfig = {
         {
           iconPath: require(`./assets/images/icon-${mainStyles.theme}.png`),
           desc: '关于我们',
-          targetPath: '/tpls/mine/pages/about/index',
+          targetPath: 'https://taro-ui.jd.com/#/docs/quickstart',
         },
       ],
     ],

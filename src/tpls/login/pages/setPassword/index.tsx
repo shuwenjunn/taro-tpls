@@ -1,10 +1,8 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import API from '@/api/request'
 import { Button, Form, Input, View } from '@tarojs/components'
 import styles from '../login/style.module.less'
-import * as service from '../../../../pages/login/service'
-import { config } from '../../config'
-import { setData } from '../../model'
+// import { config } from '../../config'
+// import { setData } from '../../model'
 
 type PageStateProps = {}
 
@@ -92,12 +90,12 @@ export default class Index extends Component<IProps, PageState> {
     }
 
     this.setState({ loading: true })
-    const { status, result } = await service.login({ password, passwordConfirm })
-    this.setState({ loading: false })
-    if (status === 200) {
-      setData(config.login.api.phoneCodeLogin.model, null)
-      Taro.navigateBack()
-    }
+    // const {status, result} = await config.login.api.userNameLogin.service(username, password)
+    // this.setState({ loading: false })
+    // if (status === 200) {
+    //   setData(config.login.api.phoneCodeLogin.model, null)
+    //   Taro.navigateBack()
+    // }
   }
 
 

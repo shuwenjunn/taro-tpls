@@ -1,9 +1,9 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { Image, View, Picker, Button, Input } from '@tarojs/components'
-import { AtModal, AtModalHeader, AtModalContent, AtModalAction } from "taro-ui"
+import Taro, {Component, Config} from '@tarojs/taro'
+import {Image, View, Picker, Input} from '@tarojs/components'
+import {AtModal, AtModalHeader, AtModalAction} from "taro-ui"
 import "taro-ui/dist/style/components/modal.scss"
 import styles from './style.module.less'
-import { config } from '../../config'
+import {config} from '../../config'
 import * as model from '../../model'
 
 console.log('config', config)
@@ -60,12 +60,18 @@ export default class Index extends Component<IProps, PageState> {
    */
   switchPage = (data: any) => {
     let url = data.targetPath
-    if (data.params) {
-      url += '?params=' + JSON.stringify(data.params)
+    if (url.indexOf('http') > -1) {
+      Taro.navigateTo({
+        url: '/pages/webview/index?src=' + url
+      })
+    } else {
+      if (data.params) {
+        url += '?params=' + JSON.stringify(data.params)
+      }
+      Taro.navigateTo({
+        url: url
+      })
     }
-    Taro.navigateTo({
-      url: url
-    })
   }
 
   onSelect = (e) => {
@@ -73,13 +79,13 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   onSubmit = () => {
-    this.setState({ visible: false })
+    this.setState({visible: false})
   }
 
 
   render() {
     console.log('config.userinfo.list', config.userinfo.list)
-    const { gender, visible } = this.state
+    const {visible} = this.state
     return (
       <View className={styles.index}>
 
@@ -108,7 +114,9 @@ export default class Index extends Component<IProps, PageState> {
                 <View className={styles.desc}>性别</View>
               </View>
               <View className={styles.itR}>
-                <View className={styles.value}>{config.userinfo.genderMap[model.getData('userinfo')[config.userinfo.genderKey]] || '未知'}</View>
+                <View
+                  className={styles.value}
+                >{config.userinfo.genderMap[model.getData('userinfo')[config.userinfo.genderKey]] || '未知'}</View>
                 <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
               </View>
             </View>

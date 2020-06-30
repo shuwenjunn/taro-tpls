@@ -3,7 +3,6 @@ import API from '@/api/request'
 import { Button, Form, Input, View } from '@tarojs/components'
 import styles from '../login/style.module.less'
 import SlideVerification from '../../plugin/slideVerification'
-import * as service from '../../../../pages/login/service'
 
 
 type PageStateProps = {}
@@ -97,15 +96,15 @@ export default class Index extends Component<IProps, PageState> {
     }
 
     this.setState({ loading: true, verifyVisible: false })
-    const { status, result } = await service.login({ phone, code, password, passwordConfirm })
-    this.setState({ loading: false })
-    if (status === 200) {
-      API.setToken(result)
-      Taro.navigateBack()
-      // Taro.navigateTo({
-      //   url: '/pages/index/index'
-      // })
-    }
+    // const { status, result } = await config.login..login({ phone, code, password, passwordConfirm })
+    // this.setState({ loading: false })
+    // if (status === 200) {
+    //   API.setToken(result)
+    //   Taro.navigateBack()
+    //   // Taro.navigateTo({
+    //   //   url: '/pages/index/index'
+    //   // })
+    // }
   }
 
   onGetCode = () => {

@@ -1,7 +1,10 @@
-import Taro, {Component, Config} from '@tarojs/taro'
-import {View, Switch, Input, Button, Form} from '@tarojs/components'
-import styles from '../addAddress/style.module.less'
-
+import Taro, { Component, Config } from '@tarojs/taro'
+import { View, Switch, Input, Button, Form } from '@tarojs/components'
+import { AddressCardprops } from '../../components/AddressCard'
+import styles from './style.module.less'
+import appStyle from '../../../../app.less'
+import RegionPicker from '../../components/RegionPicker'
+import RadioItem from '../../components/RadioItem'
 
 type PageStateProps = {}
 
@@ -9,14 +12,7 @@ type PageDispatchProps = {}
 
 type PageOwnProps = {}
 
-type PageState = {
-  isDefault: boolean
-  gender: 'man' | 'woman'
-  city: string
-  address: string
-  contact: string
-  phone: string
-}
+type PageState = {}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
@@ -25,7 +21,7 @@ interface Index {
 }
 
 
-class Index extends Component<PageOwnProps, PageState> {
+class Index extends Component<PageOwnProps, PageState & Omit<AddressCardprops, 'onSelect'>> {
 
   constructor() {
     super()
@@ -40,22 +36,16 @@ class Index extends Component<PageOwnProps, PageState> {
     }
   }
 
+  static options = {
+    addGlobalClass: true
+  }
+
   config: Config = {
-    navigationBarTitleText: '修改地址'
+    navigationBarTitleText: '添加地址'
   }
 
   componentDidMount() {
-    // 接收参数的地方
 
-    const params = this.$router.params ? JSON.parse(this.$router.params.data) : {}
-    this.setState({
-      isDefault: params.isDefault,
-      gender: params.gender,
-      city: params.city,
-      address: params.address,
-      contact: params.contact,
-      phone: params.phone
-    })
   }
 
   componentWillUnmount() {
@@ -70,11 +60,11 @@ class Index extends Component<PageOwnProps, PageState> {
   onFormItemChange = (e: any) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
-    this.setState({[`${e.target.id}`]: e.detail.value})
+    this.setState({ [`${e.target.id}`]: e.detail.value })
   }
 
   changeGender = (gender) => {
-    this.setState({gender})
+    this.setState({ gender })
   }
 
   onSwitchChange = (e) => {
@@ -84,8 +74,8 @@ class Index extends Component<PageOwnProps, PageState> {
   }
 
   onSubmit = (e) => {
-    const {city, address, contact, phone} = e.detail.value
-    const {isDefault, gender} = this.state
+    const { address, contact, phone } = e.detail.value
+    const { isDefault, gender, city } = this.state
     if (!city) {
       Taro.showToast({
         title: '请输入地区',
@@ -119,14 +109,25 @@ class Index extends Component<PageOwnProps, PageState> {
       return
     }
     const addressData = Taro.getStorageSync('addressData') ? JSON.parse(Taro.getStorageSync('addressData')) : []
-    addressData.push({...e.detail.value, isDefault, gender})
+    addressData.push({ ...e.detail.value, isDefault, gender, city })
     Taro.setStorageSync('addressData', JSON.stringify(addressData))
     Taro.navigateBack()
   }
 
+  onGetRegion = (region) => {
+    // 参数region为选择的省市区
+    console.log(region.replace(/ - /g, ''))
+    this.setState({
+      city: region.replace(/ - /g, '')
+    })
+  }
+
+  onGetRadioValue = (value: string) => {
+    this.setState({ gender: value as AddressCardprops['gender'] })
+  }
 
   render() {
-    const {gender, city, address, contact, phone} = this.state
+    const { city, address, contact, phone } = this.state
 
     return (
       <View className={styles.wrapper}>
@@ -134,44 +135,38 @@ class Index extends Component<PageOwnProps, PageState> {
 
           <View className={styles.formItem}>
             <View className={styles.label}>所在地区</View>
-            <Input
-              id='city'
-              name='city' value={city} className={styles.input} placeholder='请选择地区'
-              onInput={this.onFormItemChange.bind(this)}/>
+            {/*<Input*/}
+            {/*  id='city'*/}
+            {/*  name='city' value={city} className={styles.input} placeholder='请选择地区'*/}
+            {/*  onInput={this.onFormItemChange.bind(this)}/>*/}
+
+            <RegionPicker
+              onGetRegion={this.onGetRegion.bind(this)}
+              defaultValue={city}
+            />
           </View>
 
           <View className={styles.formItem}>
             <View className={styles.label}>详细地址</View>
-            <Input name='address' value={address} className={styles.input} placeholder='请填写详细地址'/>
+            <Input name='address' value={address} className={styles.input} placeholder='请填写详细地址' />
           </View>
 
           <View className={styles.formItem}>
             <View className={styles.label}>联系人</View>
-            <Input name='contact' value={contact} className={styles.input} placeholder='请填写联系人'/>
+            <Input name='contact' value={contact} className={styles.input} placeholder='请填写联系人' />
           </View>
 
-          <View className={styles.radio}>
-            <View className={styles.radioIt} onClick={this.changeGender.bind(this, 'man')}>
-              <View
-                className={gender === 'man' ? styles.icon : [`${styles.icon}`, `${styles.uncheck}`].join(' ')}
-              >
-              </View>
-              <View className={styles.desc}>先生</View>
-            </View>
-            <View className={styles.radioIt} onClick={this.changeGender.bind(this, 'woman')}>
-              <View
-                className={gender === 'woman' ? styles.icon : [`${styles.icon}`, `${styles.uncheck}`].join(' ')}
-              >
-              </View>
-              <View className={styles.desc}>女士</View>
-            </View>
-          </View>
+          <RadioItem
+            onGetRadioValue={this.onGetRadioValue.bind(this)}
+            radioData={[{ text: '男士', value: 'man' }, { text: '女士', value: 'woman' }]}
+            initValue='man'
+          />
 
           <View className={styles.formItem}>
             <View className={styles.label}>手机号</View>
             <Input name='phone' value={phone} className={styles.input} placeholder='请填写手机号' type='number' />
           </View>
-          <Button className={styles.submit} formType='submit'>修改地址</Button>
+          <Button className={styles.submit} formType='submit'>保存地址</Button>
         </Form>
         <View className={styles.optItem}>
           <View className={styles.label}>设为默认地址</View>
@@ -179,7 +174,7 @@ class Index extends Component<PageOwnProps, PageState> {
             className={styles.switch}
             checked={this.state.isDefault}
             onChange={this.onSwitchChange}
-            color='#0f89ec'
+            color={appStyle.baseColor}
           />
         </View>
       </View>
