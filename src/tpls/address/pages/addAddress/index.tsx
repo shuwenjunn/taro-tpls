@@ -1,7 +1,8 @@
 import Taro, {Component, Config} from '@tarojs/taro'
-import {View, Switch, Input, Button, Form, Picker,Image} from '@tarojs/components'
+import {View, Switch, Input, Button, Form, Picker, Image} from '@tarojs/components'
 import styles from './style.module.less'
 import checkedImg from '../../assets/images/check.svg'
+import {config} from '../../config'
 
 type PageStateProps = {}
 
@@ -16,7 +17,8 @@ type PageState = {
   cityTemp: string
   address: string
   contact: string
-  phone: string
+  phone: string,
+  id: number
 }
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
@@ -38,7 +40,8 @@ class Index extends Component<PageOwnProps, PageState> {
       address: '',
       contact: '',
       phone: '',
-      cityTemp: ''
+      cityTemp: '',
+      id: 0
     }
   }
 
@@ -54,13 +57,16 @@ class Index extends Component<PageOwnProps, PageState> {
       Taro.setNavigationBarTitle({
         title: '修改地址'
       })
+
+      console.log('params----', params)
       this.setState({
         isDefault: params.isDefault,
         gender: params.gender,
-        cityTemp: params.cityTemp,
+        cityTemp: params.city,
         address: params.address,
         contact: params.contact,
-        phone: params.phone
+        phone: params.phone,
+        id: params.id
       })
     } else {
       Taro.setNavigationBarTitle({
@@ -101,8 +107,8 @@ class Index extends Component<PageOwnProps, PageState> {
   }
 
   onSubmit = (e) => {
-    const {address, contact, phone, cityTemp} = e.detail.value
-    const {isDefault, gender} = this.state
+    const {address, contact, phone} = e.detail.value
+    const {isDefault, gender, cityTemp, id} = this.state
     if (!cityTemp) {
       Taro.showToast({
         title: '请选择地区',
@@ -135,12 +141,47 @@ class Index extends Component<PageOwnProps, PageState> {
       })
       return
     }
-    const addressData = Taro.getStorageSync('addressData') ? JSON.parse(Taro.getStorageSync('addressData')) : []
-    addressData.push({...e.detail.value, isDefault, gender})
-    Taro.setStorageSync('addressData', JSON.stringify(addressData))
-    Taro.navigateBack()
+
+    const data = {
+      contacts: contact,//char # 联系人
+      gender: gender,//char # 性别
+      phone: phone,//char # 手机号
+      city: cityTemp,//char # 城市
+      address: address,//char # 详细地址
+      is_default: isDefault,//boolean # 是否是默认
+    }
+    if (id) {
+      this.updateAddress({...data, id})
+    } else {
+      this.addAddress(data)
+    }
   }
 
+  /**
+   * 添加地址
+   * @param data
+   */
+  addAddress = async (data) => {
+    Taro.showLoading({title: ''})
+    const {status} = await config.modifyAddress.api.addAddress.service({address_info: JSON.stringify(data)})
+    if (status === 'ok') {
+      Taro.navigateBack()
+    }
+    Taro.hideLoading()
+  }
+
+  /**
+   * 修改地址
+   * @param data
+   */
+  updateAddress = async (data) => {
+    Taro.showLoading({title: ''})
+    const {status} = await config.modifyAddress.api.updateAddress.service({address_info: JSON.stringify(data)})
+    if (status === 'ok') {
+      Taro.navigateBack()
+    }
+    Taro.hideLoading()
+  }
 
   render() {
     const {gender, city, address, contact, phone, cityTemp} = this.state
@@ -153,21 +194,21 @@ class Index extends Component<PageOwnProps, PageState> {
             <View className={styles.formItem}>
               <View className={styles.label}>所在地区</View>
               <View className={styles.input}>
-                {city.length > 0 ? cityTemp : <View className={styles.placeholder}>请选择地区</View>}
+                {cityTemp ? cityTemp : <View className={styles.placeholder}>请选择地区</View>}
               </View>
-              <Image src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' className={styles.arrow} />
+              <Image src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' className={styles.arrow}/>
             </View>
           </Picker>
 
 
           <View className={styles.formItem}>
             <View className={styles.label}>详细地址</View>
-            <Input name='address' value={address} className={styles.input} placeholder='请填写详细地址' />
+            <Input name='address' value={address} className={styles.input} placeholder='请填写详细地址'/>
           </View>
 
           <View className={styles.formItem}>
             <View className={styles.label}>联系人</View>
-            <Input name='contact' value={contact} className={styles.input} placeholder='请填写联系人' />
+            <Input name='contact' value={contact} className={styles.input} placeholder='请填写联系人'/>
           </View>
 
           <View className={styles.radio}>
@@ -175,7 +216,7 @@ class Index extends Component<PageOwnProps, PageState> {
               <View
                 className={gender === 'man' ? styles.icon : [`${styles.icon}`, `${styles.uncheck}`].join(' ')}
               >
-                <Image src={checkedImg} />
+                <Image src={checkedImg}/>
               </View>
               <View className={styles.desc}>先生</View>
             </View>
@@ -183,7 +224,7 @@ class Index extends Component<PageOwnProps, PageState> {
               <View
                 className={gender === 'woman' ? styles.icon : [`${styles.icon}`, `${styles.uncheck}`].join(' ')}
               >
-                <Image src={checkedImg} />
+                <Image src={checkedImg}/>
               </View>
               <View className={styles.desc}>女士</View>
             </View>
@@ -191,7 +232,7 @@ class Index extends Component<PageOwnProps, PageState> {
 
           <View className={styles.formItem}>
             <View className={styles.label}>手机号</View>
-            <Input name='phone' value={phone} className={styles.input} placeholder='请填写手机号' type='number' />
+            <Input name='phone' value={phone} className={styles.input} placeholder='请填写手机号' type='number'/>
           </View>
           <Button className={styles.submit} formType='submit'>修改地址</Button>
         </Form>

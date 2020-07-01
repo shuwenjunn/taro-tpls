@@ -1,12 +1,14 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text} from '@tarojs/components'
 import styles from './style.module.less'
+import RadioIt from "@/components/RadioIt"
 
 export interface AddressCardprops {
   /**
    * 选择地址回调方法
    */
   onSelect(props: AddressCardprops): void
+
   contact: string
   phone: string
   city: string
@@ -24,7 +26,6 @@ export class AddressCard extends Component<AddressCardprops, {}> {
     })
   }
 
-
   render() {
     return (
       <View className={styles.address_card} onClick={() => this.props.onSelect(this.props)}>
@@ -37,7 +38,7 @@ export class AddressCard extends Component<AddressCardprops, {}> {
         </View>
         <View className={styles.footer}>
           <View className={styles.check}>
-            <View className={styles.icon}></View>
+            <RadioIt isCheck={this.props.isDefault}/>
             <View className={styles.text}>默认地址</View>
           </View>
           <View className={styles.opt} onClick={this.goEditAddress.bind(this)}>

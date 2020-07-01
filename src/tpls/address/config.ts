@@ -1,45 +1,49 @@
 import API from "@/api/request"
-import BankConfig from './types/bank'
-import AddBankConfig from './types/addBank'
+import AddressConfig from './types/address'
+import AddAddressConfig from './types/addAddress'
 
 type Iconfig = {
-    bank: BankConfig
-    addBank: AddBankConfig
+  address: AddressConfig
+  modifyAddress: AddAddressConfig
 }
 
 // eslint-disable-next-line import/prefer-default-export
 export const config: Iconfig = {
-    bank: {
-        cardNameKey: 'cardName',
-        cardNumberKey: 'cardNumber',
-        cardTypeKey: 'cardType',
-        cardBgKey: 'cardBg',
-        cardLogoKey: 'cardlogo',
-        api: {
-            getCardList: {
-                service: () => {
-                    return API.request({
-                        api: 'card.get',
-                        data: {}
-                    })
-                },
-                model: 'cardList'
-            }
-        }
-    },
-    addBank: {
-        api: {
-            addBank: {
-                service: (cardNumber: string, username: string, idcard: string, phone: string, code: string) => {
-                    return API.request({
-                        api: 'card.get',
-                        data: {
-                            cardNumber, username, idcard, phone, code
-                        }
-                    })
-                }
-            }
-        }
+  address: {
+    api: {
+      getAddress: {
+        service: function () {
+          return API.request({
+            api: 'customer.myself.address.all',
+            data: {},
+            server: 'integral'
+          })
+        },
+        model: 'addressList'
+      }
     }
+  },
+  modifyAddress: {
+    api: {
+      addAddress: {
+        service: function (data) {
+          return API.request({
+            api: 'customer.myself.address.add',
+            data: {...data},
+            server: 'integral'
+          })
+        },
+      },
+      updateAddress: {
+        service: function (data) {
+          return API.request({
+            api: 'customer.myself.address.all',
+            data: {...data},
+            server: 'integral'
+          })
+        },
+      }
+    }
+  },
 }
 

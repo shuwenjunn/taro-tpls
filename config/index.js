@@ -15,6 +15,7 @@ const config = {
     "@/api": "src/common/api",
     "@/common": "src/common",
     "@/tpls": "src/tpls",
+    "@/components": "src/components",
   },
   babel: {
     sourceMap: true,

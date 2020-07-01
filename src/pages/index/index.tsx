@@ -1,11 +1,10 @@
 import {ComponentClass} from 'react'
 import Taro, {Component, Config} from '@tarojs/taro'
-import {View, Button, Text} from '@tarojs/components'
+import {View, Button} from '@tarojs/components'
 import {connect} from '@tarojs/redux'
-import {getData} from '../../tpls/login/model'
 import {add, minus, asyncAdd} from '../../store/actions/counter'
-import RadioIt from "../../components/RadioIt/index";
 import API from '@/api/request'
+import * as addressModel from '@/tpls/address/model'
 
 // #region 书写注意
 //
@@ -160,15 +159,17 @@ class Index extends Component {
         >
           账单
         </Button>
-
         <Button
           type='primary'
-          onClick={this.goWebView.bind(this)}
+          onClick={() => {
+            Taro.navigateTo({url: '/tpls/address/pages/addressList/index'})
+          }}
         >
-          webview
+          地址管理
         </Button>
-
-        <RadioIt isCheck={true}/>
+        <View>
+          当前默认地址：{addressModel.getData('currAddress') && JSON.stringify(addressModel.getData('currAddress'))}
+        </View>
       </View>
     )
   }

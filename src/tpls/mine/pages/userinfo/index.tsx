@@ -153,7 +153,7 @@ export default class Index extends Component<IProps, PageState> {
             </View>
             <View className={styles.itR}>
               <View className={styles.value}>{userinfo[config.mine.usernameKey] || '未设置'}</View>
-              <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png'/>
+              <Image className={styles.arrow} src={arrowIcon}/>
             </View>
           </View>
           <Picker mode='selector' value={0} range={config.userinfo.sexArray} onChange={this.onSelect.bind(this)}>
@@ -165,7 +165,7 @@ export default class Index extends Component<IProps, PageState> {
                 <View
                   className={styles.value}
                 >{config.userinfo.genderMap[getData('userinfo')[config.userinfo.genderKey]] || '未知'}</View>
-                <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png'/>
+                <Image className={styles.arrow} src={arrowIcon}/>
               </View>
             </View>
           </Picker>
@@ -181,7 +181,7 @@ export default class Index extends Component<IProps, PageState> {
                 </View>
                 <View className={styles.itR}>
                   <View className={styles.value}>{t.placeholder}</View>
-                  <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png'/>
+                  <Image className={styles.arrow} src={arrowIcon}/>
                 </View>
               </View>
             ))}

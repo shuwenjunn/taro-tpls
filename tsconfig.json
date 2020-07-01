@@ -27,6 +27,7 @@
       "@/api/*":["src/common/api/*"],
       "@/common/*":["src/common/*"],
       "@/tpls/*":["src/tpls/*"],
+      "@/components/*":["src/components/*"],
       "@/images/*":["src/assets/images/*"]
     }
   },

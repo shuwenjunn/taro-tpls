@@ -1,7 +1,9 @@
 import Taro, {Component, Config} from '@tarojs/taro'
 import {View} from '@tarojs/components'
 import styles from './style.module.less'
-import {AddressCard, AddressCardprops} from '../../components/AddressCard'
+import {AddressCard} from '../../components/AddressCard'
+import {config} from '../../config'
+import {setData} from '../../model'
 
 type PageStateProps = {}
 
@@ -10,7 +12,7 @@ type PageDispatchProps = {}
 type PageOwnProps = {}
 
 type PageState = {
-  addressList: Array<AddressCardprops>
+  addressList: Array<any>
 }
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
@@ -48,9 +50,7 @@ class Index extends Component <PageOwnProps, PageState> {
   }
 
   componentDidShow() {
-    this.setState({
-      addressList: Taro.getStorageSync('addressData') ? JSON.parse(Taro.getStorageSync('addressData')) : []
-    })
+    this.getAddressList()
   }
 
   componentDidHide() {
@@ -63,8 +63,23 @@ class Index extends Component <PageOwnProps, PageState> {
   }
 
   onSelect = (currAddress) => {
-    Taro.setStorageSync('currAddress', JSON.stringify(currAddress))
+    setData('currAddress', currAddress)
     Taro.navigateBack()
+  }
+
+  /**
+   * 获取收货地址列表
+   */
+  getAddressList = async () => {
+    Taro.showLoading({title: ''})
+    const {status, result} = await config.address.api.getAddress.service()
+    Taro.hideLoading()
+    if (status === 'ok') {
+      setData('addressData', result.address_list)
+      this.setState({
+        addressList: result.address_list
+      })
+    }
   }
 
   render() {
@@ -74,16 +89,18 @@ class Index extends Component <PageOwnProps, PageState> {
         {addressList.map(d => (
           <AddressCard
             key={d.phone}
-            contact={d.contact}
+            contact={d.contacts}
             address={d.address}
             phone={d.phone}
             city={d.city}
             gender={d.gender}
-            isDefault={d.isDefault}
+            isDefault={d.is_default}
             onSelect={this.onSelect.bind(this)}
           />
         ))}
-        <View className={styles.submit} onClick={this.goAddAddress.bind(this)}>添加地址</View>
+        <View className={styles.footer}>
+          <View className={styles.submit} onClick={this.goAddAddress.bind(this)}>添加地址</View>
+        </View>
       </View>
     )
   }
