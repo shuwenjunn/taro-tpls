@@ -1,9 +1,11 @@
 import Taro, {Component, Config} from '@tarojs/taro'
-import {View} from '@tarojs/components'
+import {View, Image} from '@tarojs/components'
 import styles from './style.module.less'
 import {AddressCard} from '../../components/AddressCard'
+import placeholderImg from '../../../../assets/images/placeholder.png'
 import {config} from '../../config'
 import {setData} from '../../model'
+
 
 type PageStateProps = {}
 
@@ -98,6 +100,12 @@ class Index extends Component <PageOwnProps, PageState> {
             onSelect={this.onSelect.bind(this)}
           />
         ))}
+        {addressList.length <= 0 && (
+          <Image
+            src={placeholderImg}
+            className={styles.placeholder}
+          />
+        )}
         <View className={styles.footer}>
           <View className={styles.submit} onClick={this.goAddAddress.bind(this)}>添加地址</View>
         </View>

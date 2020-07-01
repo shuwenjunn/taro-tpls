@@ -1,7 +1,6 @@
 import Taro, {Component, Config} from '@tarojs/taro'
 import {Image, View} from '@tarojs/components'
 import API from "@/api/request"
-import * as loginModel from '@/tpls/login/model'
 import styles from './style.module.less'
 import defaultAvatar from '../../assets/images/avatar.svg'
 import arrowIcon from '../../assets/images/arrow.svg'
@@ -32,7 +31,10 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   componentDidMount() {
-    this.getUserInfo()
+    const token = API.getToken()
+    if (token.access_token) {
+      this.getUserInfo()
+    }
   }
 
   getUserInfo = async () => {
@@ -119,13 +121,28 @@ export default class Index extends Component<IProps, PageState> {
     })
       .then(res => {
         if (res.tapIndex === 0) {
-          loginModel.setData('token', null)
+          this.logout()
           this.toggleFlag()
         }
+      })
+      .catch(err => {
+        console.log('err----->>', err)
       })
 
   }
 
+  /**
+   * 退出登陆
+   */
+  logout = async () => {
+    Taro.showLoading({title: ''})
+    const {status} = await config.mine.api.exitLogin.service()
+    Taro.hideLoading()
+    if (status === 'ok') {
+      API.removeToken()
+      this.toggleFlag()
+    }
+  }
 
   render() {
     const userinfo = getData(config.mine.api.getUserInfo.model)
@@ -177,7 +194,7 @@ export default class Index extends Component<IProps, PageState> {
           </View>
         ))}
 
-        {loginModel.getData('token') && (
+        {token.access_token && (
           <View className={styles.exit} onClick={this.exit.bind(this)}>
             退出登陆
           </View>

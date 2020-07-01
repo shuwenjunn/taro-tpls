@@ -7,7 +7,7 @@ export const server = {
   },
   integral: {
     // address:'http://120.78.90.180/',
-    address:'http://192.168.3.154:8011/',
+    address:'http://education.bq.com/',
     entrance: 'interface/',
     flag:'customer-mobile'
   },

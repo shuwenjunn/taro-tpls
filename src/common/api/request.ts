@@ -55,6 +55,11 @@ class Request {
     Taro.setStorageSync('token', JSON.stringify(token))
   }
 
+  public removeToken() {
+    this.token = {}
+    Taro.removeStorageSync('token')
+  }
+
   private get_params(api, params, serverType, signType) {
     let data = {
       api,

@@ -5,6 +5,7 @@ import {connect} from '@tarojs/redux'
 import {add, minus, asyncAdd} from '../../store/actions/counter'
 import API from '@/api/request'
 import * as addressModel from '@/tpls/address/model'
+import * as bankModel from '@/tpls/bank/model'
 
 // #region 书写注意
 //
@@ -168,7 +169,7 @@ class Index extends Component {
           地址管理
         </Button>
         <View>
-          当前默认地址：{addressModel.getData('currAddress') && JSON.stringify(addressModel.getData('currAddress'))}
+          当前默认银行卡：{bankModel.getData('currCard') && JSON.stringify(bankModel.getData('currCard'))}
         </View>
       </View>
     )

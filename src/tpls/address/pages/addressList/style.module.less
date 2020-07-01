@@ -5,15 +5,22 @@
   box-sizing: border-box;
   padding-bottom: 150px;
 
+  .placeholder {
+    margin: 200px auto;
+    width: 339px;
+    height: 227px;
+    display: block;
+
+  }
+
   .footer {
     width: 750px;
-    height: 104px;
+    padding: 12px 0;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 7px 64px 0px rgba(0, 0, 0, 0.07);
     position: fixed;
     bottom: 0;
     display: flex;
-    align-items: center;
     justify-content: center;
 
     .submit {
@@ -26,6 +33,7 @@
       line-height: 81px;
       text-align: center;
       color: #fff;
+      margin-bottom: env(safe-area-inset-bottom);
     }
   }
 }

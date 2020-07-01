@@ -98,8 +98,9 @@ export const config: Iconfig = {
       exitLogin: {
         service: function () {
           return API.request({
-            api: 'phone.login',
-            data: {}
+            api: 'customer.account.logout',
+            data: {},
+            server: 'integral'
           })
         },
       },
