@@ -1,8 +1,15 @@
 import Taro from '@tarojs/taro'
-import request from "@/api/request"
-import {Iconfig} from './index'
+import API from "@/api/request"
+import MineConfig from './types/mine'
+import AboutConfig from './types/about'
+import UserinfoCofig from './types/userinfo'
 import mainStyles from '../../app.less'
 
+export interface Iconfig {
+  mine: MineConfig
+  about: AboutConfig
+  userinfo: UserinfoCofig
+}
 
 // eslint-disable-next-line import/prefer-default-export
 export const config: Iconfig = {
@@ -80,7 +87,7 @@ export const config: Iconfig = {
     api: {
       getUserInfo: {
         service: function () {
-          return request({
+          return API.request({
             api: 'phone.login',
             data: {}
           })
@@ -89,7 +96,7 @@ export const config: Iconfig = {
       },
       exitLogin: {
         service: function () {
-          return request({
+          return API.request({
             api: 'phone.login',
             data: {}
           })

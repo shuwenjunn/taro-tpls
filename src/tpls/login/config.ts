@@ -1,4 +1,4 @@
-import request from "@/api/request"
+import API from "@/api/request"
 import LoginConfig from './types/login'
 import RegistConfig from './types/regist'
 
@@ -18,7 +18,6 @@ type Iconfig = {
 
 }
 
-
 // eslint-disable-next-line import/prefer-default-export
 export const config: Iconfig = {
   tokenKey: 'access_token',
@@ -30,7 +29,7 @@ export const config: Iconfig = {
       userNameLogin: {
         service: function (username, password) {
           // 自定义协议写这里
-          return request({
+          return API.request({
             api: 'customer.account.login',
             data: {username, password},
             server: 'integral'
@@ -40,7 +39,7 @@ export const config: Iconfig = {
       },
       phoneCodeLogin: {
         service: function (phone, code) {
-          return request({
+          return API.request({
             api: 'phone.login',
             data: {phone, code},
             server: 'integral'
@@ -54,7 +53,7 @@ export const config: Iconfig = {
     api: {
       customerAccountRegister: {
         service(phone: string, code: string, password: string): Promise<any> {
-          return request({
+          return API.request({
             api: 'customer.account.register',
             data: {phone, code, password},
             server: 'integral'
@@ -65,21 +64,21 @@ export const config: Iconfig = {
   },
   commonApi: {
     getPhoneCode: function (phone) {
-      return request({
+      return API.request({
         api: 'customer.account.vcode.phone',
         data: {number: phone},
         server: 'integral'
       })
     },
     getImageCode: function () {
-      return request({
+      return API.request({
         api: 'customer.account.vcode.image',
         data: {},
         server: 'integral'
       })
     },
     logOut: function () {
-      return request({
+      return API.request({
         api: 'customer.account.logout',
         data: {},
         server: 'integral'

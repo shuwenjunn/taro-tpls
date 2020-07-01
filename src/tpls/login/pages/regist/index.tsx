@@ -4,6 +4,7 @@ import {Button, Form, Input, View} from '@tarojs/components'
 import styles from '../login/style.module.less'
 import {config} from '../../config'
 import SlideVerification from '../../plugin/slideVerification'
+import API from "@/api/request";
 
 
 type PageStateProps = {}
@@ -101,7 +102,7 @@ export default class Index extends Component<IProps, PageState> {
       const {status, result} = await config.regist.api.customerAccountRegister.service(phone, code, md5(password))
       console.log('status,result', status, result)
       if (status === 'ok') {
-        Taro.setStorageSync(config.tokenKey, JSON.stringify(result))
+        API.setToken(result)
         Taro.navigateBack()
       }
     } catch (e) {

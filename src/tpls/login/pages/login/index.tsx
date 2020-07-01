@@ -86,6 +86,7 @@ export default class Index extends Component<IProps, PageState> {
       })
       return
     }
+    // 获取图片验证码
     try {
       const {status, result} = await config.commonApi.getImageCode()
       if (status === 'ok') {
@@ -157,7 +158,7 @@ export default class Index extends Component<IProps, PageState> {
       const {status, result} = await config.login.api.userNameLogin.service(username, md5(password))
       this.setState({loading: false})
       if (status === 'ok') {
-        Taro.setStorageSync(config.tokenKey, JSON.stringify(result))
+        API.setToken(result)
         setData(config.login.api.userNameLogin.model, result)
         Taro.navigateBack()
       }

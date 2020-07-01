@@ -5,6 +5,7 @@ import {connect} from '@tarojs/redux'
 import {getData} from '../../tpls/login/model'
 import {add, minus, asyncAdd} from '../../store/actions/counter'
 import RadioIt from "../../components/RadioIt/index";
+import API from '@/api/request'
 
 // #region 书写注意
 //
@@ -86,17 +87,11 @@ class Index extends Component {
     this.setState({
       currAddress: Taro.getStorageSync('currAddress') ? JSON.parse(Taro.getStorageSync('currAddress')) : {}
     })
+
+
   }
 
   componentDidHide() {
-  }
-
-  async add() {
-    const a = await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve('1111')
-      }, 1000)
-    })
   }
 
   goSelect = () => {
@@ -136,19 +131,11 @@ class Index extends Component {
   }
 
   render() {
+    const token = API.getToken()
     return (
       <View className='index'>
 
-        {/*<Button className='add_btn' onClick={this.props.add}>+</Button>*/}
-        {/*<Button className='dec_btn' onClick={this.props.dec}>-</Button>*/}
-        {/*<Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>*/}
-        {/*<View><Text>{this.props.counter.num}</Text></View>*/}
-        {/*<View onClick={this.add.bind(this)}><Text>Hello, World</Text></View>*/}
-
-        {/* 你的收货地址是：{JSON.stringify(currAddress) || ''}
-        <Button type='primary' onClick={this.goSelect.bind(this)}>选择收货地址</Button> */}
-
-        {getData(`token`) ? JSON.stringify(getData(`token`)) : (
+        {token.access_token ? JSON.stringify(token) : (
           <Button type='primary' onClick={this.goLogin.bind(this)}>登陆</Button>
         )}
         <Button type='primary' onClick={this.goModifyPassword.bind(this)}>修改密码</Button>
