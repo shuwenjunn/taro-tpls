@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import qs from 'qs'
 import {
   server,
-} from '../config';
+} from './config';
 import {
   hex_sha1
 } from './security/sha1'

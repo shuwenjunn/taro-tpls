@@ -1,12 +1,7 @@
-import Taro from '@tarojs/taro'
+import {Iconfig, setting} from '@/tpls/mine'
 import request from "@/api/request"
-import {Iconfig} from './index'
 import mainStyles from '../../app.less'
-
-
-// eslint-disable-next-line import/prefer-default-export
-export const config: Iconfig = {
-  // 我的页面
+const mineConfig: Iconfig = {
   mine: {
     avatarKey: 'avata',
     usernameKey: 'username',
@@ -97,8 +92,6 @@ export const config: Iconfig = {
       },
     }
   },
-
-  // 关于
   about: {
     appName: 'APP名称',
     version: 'v.1.0.1',
@@ -141,4 +134,9 @@ export const config: Iconfig = {
     ]
   }
 }
+
+setting.setConfig(mineConfig)
+
+
+
 

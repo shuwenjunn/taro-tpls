@@ -1,7 +1,3 @@
-// appid
-export const appid = 'wx7515a3e1dd99570f'
-
-
 //服务器
 export const server = {
   sso: {
@@ -16,4 +12,3 @@ export const server = {
     flag:'web'
   },
 }
-
