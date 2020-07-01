@@ -1,10 +1,12 @@
 import Taro, {Component, Config} from '@tarojs/taro'
 import {Image, View, Picker, Input} from '@tarojs/components'
 import {AtModal, AtModalHeader, AtModalAction} from "taro-ui"
+import defaultAvatar from '../../assets/images/avatar.svg'
+import arrowIcon from '../../assets/images/arrow.svg'
 import "taro-ui/dist/style/components/modal.scss"
 import styles from './style.module.less'
 import {config} from '../../config'
-import * as model from '../../model'
+import {setData, getData} from '../../model'
 
 type PageStateProps = {}
 
@@ -15,6 +17,8 @@ type PageOwnProps = {}
 type PageState = {
   gender: number
   visible: boolean
+  renderFlag: boolean
+  nickname: string
 }
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
@@ -28,11 +32,15 @@ export default class Index extends Component<IProps, PageState> {
     this.state = {
       gender: 0,
       visible: false,
+      renderFlag: false,
+      nickname: ''
     }
   }
 
   componentDidMount() {
-
+    this.setState({
+      nickname: getData(config.mine.api.getUserInfo.model)[config.mine.usernameKey]
+    })
   }
 
   config: Config = {
@@ -72,17 +80,57 @@ export default class Index extends Component<IProps, PageState> {
     }
   }
 
+  /**
+   * 修改性别
+   * @param e
+   */
   onSelect = (e) => {
-
+    const map = {
+      '0': 'man',
+      '1': 'woman'
+    }
+    this.updateUserinfo({gender: map[e.detail.value]})
   }
 
+  /**
+   * 修改昵称
+   */
   onSubmit = () => {
-    this.setState({visible: false})
+    this.updateUserinfo({name: this.state.nickname})
+    this.setState({visible: false,})
   }
 
+  /**
+   * 修改用户信息
+   * @param data
+   */
+  updateUserinfo = async (data) => {
+    Taro.showLoading({title: '修改中'})
+    const {status} = await config.userinfo.api.updateUserInfo.service({myself_info: JSON.stringify(data)})
+    if (status === 'ok') {
+      this.getUserInfo()
+    }
+    Taro.hideLoading()
+  }
+
+  getUserInfo = async () => {
+    const {status, result} = await config.mine.api.getUserInfo.service()
+    if (status === 'ok') {
+      console.log('result.customer_info', result.customer_info)
+      config.mine.api.getUserInfo.model && setData(config.mine.api.getUserInfo.model, result.customer_info)
+      this.toggleFlag()
+    }
+  }
+
+  toggleFlag = () => {
+    this.setState({
+      renderFlag: !this.state.renderFlag
+    })
+  }
 
   render() {
-    const {visible} = this.state
+    const {visible, nickname} = this.state
+    const userinfo = getData(config.mine.api.getUserInfo.model)
     return (
       <View className={styles.index}>
 
@@ -92,7 +140,10 @@ export default class Index extends Component<IProps, PageState> {
               <View className={styles.desc}>头像</View>
             </View>
             <View className={styles.itR}>
-              <Image className={styles.header} src='https://i.loli.net/2020/06/24/PnCt3khiUGcR6qa.png' />
+              <Image
+                className={styles.header}
+                src={userinfo[config.mine.avatarKey] ? userinfo[config.mine.avatarKey] : defaultAvatar}
+              />
             </View>
           </View>
 
@@ -101,8 +152,8 @@ export default class Index extends Component<IProps, PageState> {
               <View className={styles.desc}>昵称</View>
             </View>
             <View className={styles.itR}>
-              <View className={styles.value}>安宝宝</View>
-              <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
+              <View className={styles.value}>{userinfo[config.mine.usernameKey] || '未设置'}</View>
+              <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png'/>
             </View>
           </View>
           <Picker mode='selector' value={0} range={config.userinfo.sexArray} onChange={this.onSelect.bind(this)}>
@@ -113,8 +164,8 @@ export default class Index extends Component<IProps, PageState> {
               <View className={styles.itR}>
                 <View
                   className={styles.value}
-                >{config.userinfo.genderMap[model.getData('userinfo')[config.userinfo.genderKey]] || '未知'}</View>
-                <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
+                >{config.userinfo.genderMap[getData('userinfo')[config.userinfo.genderKey]] || '未知'}</View>
+                <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png'/>
               </View>
             </View>
           </Picker>
@@ -130,7 +181,7 @@ export default class Index extends Component<IProps, PageState> {
                 </View>
                 <View className={styles.itR}>
                   <View className={styles.value}>{t.placeholder}</View>
-                  <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
+                  <Image className={styles.arrow} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png'/>
                 </View>
               </View>
             ))}
@@ -142,7 +193,12 @@ export default class Index extends Component<IProps, PageState> {
         >
           <AtModalHeader>修改昵称</AtModalHeader>
           <View className={styles.atModalContent}>
-            <Input className={styles.input} placeholder='请输入昵称' />
+            <Input
+              className={styles.input}
+              onInput={(e) => this.setState({nickname: e.detail.value})}
+              placeholder='请输入昵称'
+              value={nickname}
+            />
           </View>
           <AtModalAction>
             <View className={styles.submit} onClick={this.onSubmit.bind(this)}>确定</View>

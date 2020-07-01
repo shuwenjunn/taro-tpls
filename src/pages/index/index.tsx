@@ -87,8 +87,6 @@ class Index extends Component {
     this.setState({
       currAddress: Taro.getStorageSync('currAddress') ? JSON.parse(Taro.getStorageSync('currAddress')) : {}
     })
-
-
   }
 
   componentDidHide() {

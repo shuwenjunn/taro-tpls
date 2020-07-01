@@ -61,9 +61,9 @@ class Request {
       signType,
       ...params
     }
-    const access_token = this.getToken()
-    if (access_token) {
-      data.auth = access_token
+    const token = this.getToken()
+    if (token.access_token) {
+      data.auth = token.access_token
     }
 
     data = {

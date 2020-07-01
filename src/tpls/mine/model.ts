@@ -1,7 +1,6 @@
 const globalData = {
     userinfo: {
-        gender: 'man',
-        username: 'shuwenjun'
+
     }
 }
 

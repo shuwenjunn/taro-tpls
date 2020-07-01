@@ -1,7 +1,10 @@
 import Taro, {Component, Config} from '@tarojs/taro'
 import {Image, View} from '@tarojs/components'
+import API from "@/api/request"
 import * as loginModel from '@/tpls/login/model'
 import styles from './style.module.less'
+import defaultAvatar from '../../assets/images/avatar.svg'
+import arrowIcon from '../../assets/images/arrow.svg'
 import {config} from '../../config'
 import {setData, getData} from '../../model'
 
@@ -29,15 +32,16 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   componentDidMount() {
-
+    this.getUserInfo()
   }
 
   getUserInfo = async () => {
     const {status, result} = await config.mine.api.getUserInfo.service()
     if (status === 'ok') {
-      config.mine.api.getUserInfo.model && setData(config.mine.api.getUserInfo.model, result)
+      console.log('result.customer_info', result.customer_info)
+      config.mine.api.getUserInfo.model && setData(config.mine.api.getUserInfo.model, result.customer_info)
+      this.toggleFlag()
     }
-
   }
 
   config: Config = {
@@ -94,7 +98,7 @@ export default class Index extends Component<IProps, PageState> {
   }
 
   goUserInfo = () => {
-    if (loginModel.getData('token')) {
+    if (API.getToken().access_token) {
       Taro.navigateTo({
         url: '/tpls/mine/pages/userinfo/index'
       })
@@ -103,7 +107,6 @@ export default class Index extends Component<IProps, PageState> {
         url: '/tpls/login/pages/login/index'
       })
     }
-
   }
 
   /**
@@ -125,19 +128,21 @@ export default class Index extends Component<IProps, PageState> {
 
 
   render() {
-    const userinfo = getData('userinfo')
+    const userinfo = getData(config.mine.api.getUserInfo.model)
+    const token = API.getToken()
     return (
       <View className={styles.index}>
         <View className={styles.header} onClick={this.goUserInfo.bind(this)}>
           <View className={styles.headerL}>
-            <Image className={styles.avatar}
-              src={(userinfo[config.mine.avatarKey] && loginModel.getData('token')) ? userinfo[config.mine.avatarKey] : 'https://i.loli.net/2020/06/28/P5GmX1uWwqnfTbv.png'}
+            <Image
+              className={styles.avatar}
+              src={userinfo[config.mine.avatarKey] && token.access_token ? userinfo[config.mine.avatarKey] : defaultAvatar}
             />
             <View
               className={styles.name}
-            >{loginModel.getData('token') ? (userinfo[config.mine.usernameKey] || '未设置用户名') : '未登录'}</View>
+            >{token.access_token ? (userinfo[config.mine.usernameKey] || '修改个人信息') : '未登录'}</View>
           </View>
-          <Image className={styles.headerR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
+          <Image className={styles.headerR} src={arrowIcon}/>
         </View>
 
         {config.mine.blocks.length > 0 && config.mine.blocks.map(d => (
@@ -147,9 +152,9 @@ export default class Index extends Component<IProps, PageState> {
             <View className={styles.items}>
               {d.items.length > 0 && d.items.map(t => (
                 <View className={styles.it} style={{width: `${(100 / d.maxCountInline)}%`}} key={t.desc}
-                  onClick={this.switchPage.bind(this, t)}
+                      onClick={this.switchPage.bind(this, t)}
                 >
-                  <Image className={styles.icon} src={t.iconPath} />
+                  <Image className={styles.icon} src={t.iconPath}/>
                   <View className={styles.desc}>{t.desc}</View>
                 </View>
               ))}
@@ -162,10 +167,10 @@ export default class Index extends Component<IProps, PageState> {
             {d.length > 0 && d.map(t => (
               <View className={styles.it} key={t.desc} onClick={this.switchPage.bind(this, t)}>
                 <View className={styles.itL}>
-                  <Image className={styles.icon} src={t.iconPath} />
+                  <Image className={styles.icon} src={t.iconPath}/>
                   <View className={styles.desc}>{t.desc}</View>
                 </View>
-                <Image className={styles.itR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
+                <Image className={styles.itR} src={arrowIcon}/>
               </View>
             ))}
 

@@ -16,7 +16,7 @@ export const config: Iconfig = {
   // 我的页面
   mine: {
     avatarKey: 'avata',
-    usernameKey: 'username',
+    usernameKey: 'name',
     blocks: [{
       subTitle: '我的订单',
       maxCountInline: 4,
@@ -88,8 +88,9 @@ export const config: Iconfig = {
       getUserInfo: {
         service: function () {
           return API.request({
-            api: 'phone.login',
-            data: {}
+            api: 'customer.myself.get',
+            data: {},
+            server: 'integral'
           })
         },
         model: 'userinfo'
@@ -145,7 +146,19 @@ export const config: Iconfig = {
           }
         },
       ],
-    ]
+    ],
+    api: {
+      updateUserInfo: {
+        service: function (data) {
+          return API.request({
+            api: 'customer.myself.update',
+            data: {...data},
+            server: 'integral'
+          })
+        },
+        model: 'userinfo'
+      },
+    }
   }
 }
 
