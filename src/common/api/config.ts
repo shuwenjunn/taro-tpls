@@ -7,8 +7,8 @@ export const server = {
   },
   integral: {
     // address:'http://120.78.90.180/',
-    address:'http://192.168.3.9:5000/',
+    address:'http://192.168.3.154:8011/',
     entrance: 'interface/',
-    flag:'web'
+    flag:'customer-mobile'
   },
 }

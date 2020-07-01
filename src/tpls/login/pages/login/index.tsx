@@ -1,5 +1,6 @@
 import Taro, {Component, Config} from '@tarojs/taro'
 import API from '@/api/request'
+import md5 from 'js-md5'
 import {Button, Form, Input, View} from '@tarojs/components'
 import styles from './style.module.less'
 import SlideVerification from '../../plugin/slideVerification'
@@ -70,7 +71,7 @@ export default class Index extends Component<IProps, PageState> {
     }
   }
 
-  onGetCode = () => {
+  onGetCode = async () => {
     this.setState({verifyVisible: true})
   }
 
@@ -84,6 +85,14 @@ export default class Index extends Component<IProps, PageState> {
         duration: 2000
       })
       return
+    }
+    try {
+      const {status, result} = await config.commonApi.getImageCode()
+      if (status === 'ok') {
+        console.log(status, result)
+      }
+    } catch (e) {
+      console.log('e---->>', e)
     }
     this.setState({verifyVisible: true, username, password})
 
@@ -145,10 +154,10 @@ export default class Index extends Component<IProps, PageState> {
     if (loginType === 'username') {
       this.setState({loading: true, verifyVisible: false})
       const {username, password} = this.state
-      const {status, result} = await config.login.api.userNameLogin.service(username, password)
+      const {status, result} = await config.login.api.userNameLogin.service(username, md5(password))
       this.setState({loading: false})
-      if (status === 200) {
-        API.setToken(result)
+      if (status === 'ok') {
+        Taro.setStorageSync(config.tokenKey, JSON.stringify(result))
         setData(config.login.api.userNameLogin.model, result)
         Taro.navigateBack()
       }
@@ -188,13 +197,13 @@ export default class Index extends Component<IProps, PageState> {
           className={verifyVisible ? `${styles.verifyWrapper} ${styles.show}` : `${styles.verifyWrapper} ${styles.hide}`}
         >
           <View className={styles.content}>
-            <SlideVerification result={this.verifyResult} onRef={this.onRef} />
+            <SlideVerification result={this.verifyResult} onRef={this.onRef}/>
           </View>
         </View>
         <Form className={styles.formWrapper} onSubmit={this.onSubmit.bind(this)}>
           {loginType === 'username' ? (
             <View className={styles.formItem}>
-              <Input className={styles.input} name='username' type='text' placeholder='请输入账号' />
+              <Input className={styles.input} name='username' type='text' placeholder='请输入账号'/>
             </View>
           ) : (
             <View className={styles.formItem}>
@@ -211,7 +220,7 @@ export default class Index extends Component<IProps, PageState> {
 
           {loginType === 'phone' ? (
             <View className={styles.formItem}>
-              <Input className={styles.input} name='code' id='code' password placeholder='请输入验证码' />
+              <Input className={styles.input} name='code' id='code' password placeholder='请输入验证码'/>
               {phone && countdownTime === 60 ? (
                 <View className={styles.codeBtn} onClick={this.onGetCode.bind(this)}>获取验证码</View>
               ) : (
@@ -224,7 +233,7 @@ export default class Index extends Component<IProps, PageState> {
             </View>
           ) : (
             <View className={styles.formItem}>
-              <Input className={styles.input} name='password' password placeholder='请输入登陆密码' />
+              <Input className={styles.input} name='password' password placeholder='请输入登陆密码'/>
             </View>
           )}
           {loginType === 'username' && (

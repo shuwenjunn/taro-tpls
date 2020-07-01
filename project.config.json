@@ -81,6 +81,13 @@
 					"id": -1,
 					"name": "tpls/mine/pages/userinfo/index",
 					"pathName": "tpls/mine/pages/userinfo/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "tpls/login/pages/regist/index",
+					"pathName": "tpls/login/pages/regist/index",
 					"scene": null
 				}
 			]

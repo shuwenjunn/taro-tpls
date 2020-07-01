@@ -2,10 +2,8 @@ import Taro, {Component, Config} from '@tarojs/taro'
 import {Image, View} from '@tarojs/components'
 import * as loginModel from '@/tpls/login/model'
 import styles from './style.module.less'
-import {setting} from '../../index'
+import {config} from '../../config'
 import {setData, getData} from '../../model'
-
-const config = setting.getConfig()
 
 type PageStateProps = {}
 
@@ -133,13 +131,13 @@ export default class Index extends Component<IProps, PageState> {
         <View className={styles.header} onClick={this.goUserInfo.bind(this)}>
           <View className={styles.headerL}>
             <Image className={styles.avatar}
-                   src={(userinfo[config.mine.avatarKey] && loginModel.getData('token')) ? userinfo[config.mine.avatarKey] : 'https://i.loli.net/2020/06/28/P5GmX1uWwqnfTbv.png'}
+              src={(userinfo[config.mine.avatarKey] && loginModel.getData('token')) ? userinfo[config.mine.avatarKey] : 'https://i.loli.net/2020/06/28/P5GmX1uWwqnfTbv.png'}
             />
             <View
               className={styles.name}
             >{loginModel.getData('token') ? (userinfo[config.mine.usernameKey] || '未设置用户名') : '未登录'}</View>
           </View>
-          <Image className={styles.headerR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png'/>
+          <Image className={styles.headerR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
         </View>
 
         {config.mine.blocks.length > 0 && config.mine.blocks.map(d => (
@@ -149,9 +147,9 @@ export default class Index extends Component<IProps, PageState> {
             <View className={styles.items}>
               {d.items.length > 0 && d.items.map(t => (
                 <View className={styles.it} style={{width: `${(100 / d.maxCountInline)}%`}} key={t.desc}
-                      onClick={this.switchPage.bind(this, t)}
+                  onClick={this.switchPage.bind(this, t)}
                 >
-                  <Image className={styles.icon} src={t.iconPath}/>
+                  <Image className={styles.icon} src={t.iconPath} />
                   <View className={styles.desc}>{t.desc}</View>
                 </View>
               ))}
@@ -164,10 +162,10 @@ export default class Index extends Component<IProps, PageState> {
             {d.length > 0 && d.map(t => (
               <View className={styles.it} key={t.desc} onClick={this.switchPage.bind(this, t)}>
                 <View className={styles.itL}>
-                  <Image className={styles.icon} src={t.iconPath}/>
+                  <Image className={styles.icon} src={t.iconPath} />
                   <View className={styles.desc}>{t.desc}</View>
                 </View>
-                <Image className={styles.itR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png'/>
+                <Image className={styles.itR} src='https://i.loli.net/2020/06/24/5ujSchw2LYy8QDp.png' />
               </View>
             ))}
 
